@@ -45,6 +45,13 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex items-center justify-center relative p-4 sm:p-8 selection:bg-blue-600 selection:text-white">
 
+    <!-- TOMBOL FULLSCREEN DI POJOK KANAN PALING ATAS HALAMAN -->
+    <button onclick="toggleFullScreen()" aria-label="Layar Penuh" class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 p-2.5 sm:p-3 rounded-2xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-lg transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center">
+        <svg id="fullscreen-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+        </svg>
+    </button>
+
     <!-- NAVIGASI PANAH TIPIS MENGAPUNG (KIRI & KANAN) -->
     <button onclick="prevSlide()" aria-label="Sebelumnya" class="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-14 sm:w-12 sm:h-16 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all duration-300 active:scale-90 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-6 h-6 sm:w-7 sm:h-7">
@@ -64,7 +71,7 @@
         <!-- ==================== SLIDE 1: JUDUL & IDENTITAS KARYA ==================== -->
         <div id="slide-1" class="slide-view active">
             <div class="clean-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-                <!-- ANGKA SLIDE SAMAR DI POJOK KANAN ATAS -->
+                <!-- ANGKA SLIDE SAMAR DI POJOK KANAN ATAS CARD -->
                 <span class="absolute top-6 right-8 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
                     01 / 07
                 </span>
@@ -81,18 +88,24 @@
                     Solusi Inovatif untuk Meningkatkan Motivasi, Keterlibatan Aktif, dan Pemahaman Konsep IPAS Siswa Kelas III Sekolah Dasar
                 </p>
 
+                <!-- LAYOUT SLIDE 1 YANG DIPERBAIKI (LEBIH CLEAN & SIMETRIS) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm pt-6 border-t border-slate-100">
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-                        <p class="text-slate-500 font-medium">Mata Pelajaran & Materi:</p>
-                        <p class="font-bold text-slate-800">Ilmu Pengetahuan Alam dan Sosial (IPAS)</p>
-                        <p class="text-slate-600">Bab 4: Siklus Hidup yang Menakjubkan <br>(Topik A: Rahasia Kehidupan Hewan)</p>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                        <span class="text-blue-600 font-extrabold text-xs tracking-wider uppercase block mb-1">Mata Pelajaran & Kurikulum</span>
+                        <p class="font-bold text-slate-900 text-base">Ilmu Pengetahuan Alam dan Sosial (IPAS)</p>
+                        <div class="pt-1 text-slate-600 space-y-1">
+                            <p><strong>Bab 4:</strong> Siklus Hidup yang Menakjubkan</p>
+                            <p><strong>Topik:</strong> Rahasia Kehidupan Hewan</p>
+                        </div>
                     </div>
 
-                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
-                        <p class="text-slate-500 font-medium">Identitas Pengembang:</p>
-                        <p class="font-bold text-slate-800">Muhammad Izzul Fahmi, S.Pd.</p>
-                        <p class="text-slate-600">NIM: 250211920117 | PPG Calon Guru PGSD</p>
-                        <p class="text-slate-600">Satuan Pendidikan: UPTD SDN Tegal Besar 03 Jember</p>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                        <span class="text-blue-600 font-extrabold text-xs tracking-wider uppercase block mb-1">Identitas Pengembang</span>
+                        <p class="font-bold text-slate-900 text-base">Muhammad Izzul Fahmi, S.Pd.</p>
+                        <div class="pt-1 text-slate-600 space-y-1">
+                            <p><strong>NIM:</strong> 250211920117</p>
+                            <p><strong>Program:</strong> PPG Calon Guru - PGSD</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,7 +134,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Kondisi Riil Pembelajaran</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Materi IPAS tentang daur hidup hewan dan metamorfosis sering kali disajikan secara konvensional melalui hafalan teks dan gambar 2D statis. Hal ini membuat tahapan perubahan wujud hewan (seperti fase larva dan pupa) sulit dibayangkan secara konkret oleh anak usia 8-9 tahun.
+                            Materi IPAS tentang daur hidup hewan dan metamorfosis sering kali disajikan secara konvensional melalui hafalan teks dan gambar 2D statis[cite: 58, 62]. Hal ini membuat tahapan perubahan wujud hewan (seperti fase larva dan pupa) sulit dibayangkan secara konkret oleh anak usia 8-9 tahun.
                         </p>
                     </div>
 
@@ -132,7 +145,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Tantangan Utama di Kelas</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Terjadi penurunan motivasi belajar, perhatian murid yang cepat teralih, serta minimnya interaksi kolaboratif. Metode ceramah satu arah gagal mengakomodasi karakteristik fisik dan psikologis murid SD yang menyukai aktivitas permainan, tantangan, dan kompetisi kelompok.
+                            Terjadi penurunan motivasi belajar, perhatian murid yang cepat teralih, serta minimnya interaksi kolaboratif[cite: 58]. Metode ceramah satu arah gagal mengakomodasi karakteristik fisik dan psikologis murid SD yang menyukai aktivitas permainan, tantangan, dan kompetisi kelompok[cite: 58].
                         </p>
                     </div>
 
@@ -143,7 +156,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Kebutuhan Solusi Inovatif</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Diperlukan media pembelajaran interaktif berbasis teknologi yang kontekstual dan mampu memfasilitasi tiga pilar pembelajaran mendalam: berkesadaran (Mindful), bermakna (Meaningful), dan menggembirakan (Joyful Learning) untuk meningkatkan daya serap materi.
+                            Diperlukan media pembelajaran interaktif berbasis teknologi yang kontekstual dan mampu memfasilitasi tiga pilar pembelajaran mendalam: berkesadaran (Mindful), bermakna (Meaningful), dan menggembirakan (Joyful Learning) untuk meningkatkan daya serap materi[cite: 58, 61].
                         </p>
                     </div>
                 </div>
@@ -169,7 +182,7 @@
                     <div class="p-6 rounded-2xl bg-blue-50/70 border border-blue-100">
                         <h3 class="font-bold text-blue-900 text-base sm:text-lg mb-2">Gagasan Solusi Inovatif</h3>
                         <p class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">
-                            Mengembangkan media permainan papan tradisional yang ditransformasikan ke dalam format <strong>Ular Tangga Digital Interaktif</strong> berbasis web, kemudian dipadukan dengan model pembelajaran kooperatif tipe <strong>Teams Games Tournament (TGT)</strong>. Media ini dirancang khusus untuk menciptakan pengalaman belajar yang aktif, seru, dan kompetitif secara sehat.
+                            Mengembangkan media permainan papan tradisional yang ditransformasikan ke dalam format <strong>Ular Tangga Digital Interaktif</strong> berbasis web, kemudian dipadukan dengan model pembelajaran kooperatif tipe <strong>Teams Games Tournament (TGT)</strong>[cite: 61, 63]. Media ini dirancang khusus untuk menciptakan pengalaman belajar yang aktif, seru, dan kompetitif secara sehat.
                         </p>
                     </div>
 
@@ -178,15 +191,15 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                             <div class="p-4 bg-white rounded-xl border border-slate-200">
                                 <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 1</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Meningkatkan motivasi, rasa ingin tahu, dan antusiasme aktif murid selama proses pembelajaran IPAS.</p>
+                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Meningkatkan motivasi, rasa ingin tahu, dan antusiasme aktif murid selama proses pembelajaran IPAS[cite: 58, 60].</p>
                             </div>
                             <div class="p-4 bg-white rounded-xl border border-slate-200">
                                 <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 2</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Memudahkan pemahaman konsep daur hidup hewan (tanpa metamorfosis, metamorfosis sempurna, & tidak sempurna).</p>
+                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Memudahkan pemahaman konsep daur hidup hewan (tanpa metamorfosis, metamorfosis sempurna, & tidak sempurna)[cite: 59, 60].</p>
                             </div>
                             <div class="p-4 bg-white rounded-xl border border-slate-200">
                                 <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 3</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Menguatkan sikap sosial murid seperti bekerja sama, bernalar kritis, dan kejujuran dalam kelompok.</p>
+                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Menguatkan sikap sosial murid seperti bekerja sama, bernalar kritis, dan kejujuran dalam kelompok[cite: 59, 60].</p>
                             </div>
                         </div>
                     </div>
@@ -216,7 +229,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Kebaruan (Novelty)</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Papan permainan terhubung langsung ke layar proyektor/IFP utama dan dioperasikan menggunakan ponsel kelompok sebagai remote pengendali pengocok dadu digital via pemindaian QR Code.
+                            Papan permainan terhubung langsung ke layar proyektor/IFP utama dan dioperasikan menggunakan ponsel kelompok sebagai remote pengendali pengocok dadu digital via pemindaian QR Code[cite: 62, 63].
                         </p>
                     </div>
 
@@ -226,7 +239,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Kreativitas & Relevansi</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Sistem permainan mengintegrasikan alur kuis pilihan ganda yang otomatis muncul saat pion mendarat di petak tertentu, selaras dengan Capaian Pembelajaran IPAS Kurikulum Merdeka.
+                            Sistem permainan mengintegrasikan alur kuis pilihan ganda yang otomatis muncul saat pion mendarat di petak tertentu, selaras dengan Capaian Pembelajaran IPAS Kurikulum Merdeka[cite: 60, 63].
                         </p>
                     </div>
 
@@ -236,7 +249,7 @@
                         </div>
                         <h3 class="font-bold text-slate-900 text-base">Kebermanfaatan & Efektivitas</h3>
                         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Otomasi acakan angka dadu, pergerakan pion, dan rekapitulasi poin tim secara otomatis di layar utama menghemat waktu guru dan memberikan umpan balik langsung pada siswa.
+                            Otomasi acakan angka dadu, pergerakan pion, dan rekapitulasi poin tim secara otomatis di layar utama menghemat waktu guru dan memberikan umpan balik langsung pada siswa[cite: 63, 64].
                         </p>
                     </div>
                 </div>
@@ -264,15 +277,15 @@
                         <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Model Pembelajaran:</strong> Cooperative Learning tipe TGT (Teams Games Tournament).</span>
+                                <span><strong>Model Pembelajaran:</strong> Cooperative Learning tipe TGT (Teams Games Tournament)[cite: 61].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Pendekatan:</strong> Deep Learning (Mindful, Meaningful, & Joyful Learning).</span>
+                                <span><strong>Pendekatan:</strong> Deep Learning (Mindful, Meaningful, & Joyful Learning)[cite: 61].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Alamat Akses Media:</strong> <a href="https://izzulfahmy.github.io/Ular-Tangga-Matematika/" target="_blank" class="text-blue-600 font-bold underline break-all">https://izzulfahmy.github.io/Ular-Tangga-Matematika/</a></span>
+                                <span><strong>Alamat Akses Media:</strong> <a href="https://izzulfahmy.github.io/Ular-Tangga-Matematika/" target="_blank" class="text-blue-600 font-bold underline break-all">https://izzulfahmy.github.io/Ular-Tangga-Matematika/</a></span>[cite: 61]
                             </li>
                         </ul>
                     </div>
@@ -282,15 +295,15 @@
                         <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Tampilan Utama (Display):</strong> Papan Ular Tangga 100 petak lengkap dengan tangga, ular, dan pembacaan QR Code.</span>
+                                <span><strong>Tampilan Utama (Display):</strong> Papan Ular Tangga 100 petak lengkap dengan tangga, ular, dan pembacaan QR Code[cite: 63, 71].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Pengendali Kelompok (Remote):</strong> Antarmuka ponsel untuk menekan tombol pengocok dadu dan memilih jawaban kuis.</span>
+                                <span><strong>Pengendali Kelompok (Remote):</strong> Antarmuka ponsel untuk menekan tombol pengocok dadu dan memilih jawaban kuis[cite: 63].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Modul Kuis Interaktif:</strong> Pop-up soal analisis daur hidup hewan dengan pilihan ganda bergambar.</span>
+                                <span><strong>Modul Kuis Interaktif:</strong> Pop-up soal analisis daur hidup hewan dengan pilihan ganda bergambar[cite: 63, 71].</span>
                             </li>
                         </ul>
                     </div>
@@ -316,23 +329,23 @@
                 <div class="space-y-3">
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-3 items-start">
                         <span class="px-2.5 py-1 bg-blue-600 text-white font-bold rounded-lg text-xs flex-shrink-0">Sintak 1</span>
-                        <p class="text-slate-700"><strong>Class Presentation:</strong> Guru menyajikan skema materi daur hidup hewan (metamorfosis sempurna/tidak sempurna) di layar proyektor utama.</p>
+                        <p class="text-slate-700"><strong>Class Presentation:</strong> Guru menyajikan skema materi daur hidup hewan (metamorfosis sempurna/tidak sempurna) di layar proyektor utama[cite: 62, 63].</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-3 items-start">
                         <span class="px-2.5 py-1 bg-indigo-600 text-white font-bold rounded-lg text-xs flex-shrink-0">Sintak 2</span>
-                        <p class="text-slate-700"><strong>Teams:</strong> Murid dibagi menjadi Tim Merah dan Tim Biru. Kelompok memindai QR Code di layar proyektor menggunakan ponsel pengendali.</p>
+                        <p class="text-slate-700"><strong>Teams:</strong> Murid dibagi menjadi Tim Merah dan Tim Biru. Kelompok memindai QR Code di layar proyektor menggunakan ponsel pengendali[cite: 63].</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-3 items-start">
                         <span class="px-2.5 py-1 bg-purple-600 text-white font-bold rounded-lg text-xs flex-shrink-0">Sintak 3</span>
-                        <p class="text-slate-700"><strong>Games:</strong> Murid melempar dadu digital via ponsel, mengamati pergerakan pion di layar, dan berdiskusi kelompok menjawab kuis daur hidup hewan.</p>
+                        <p class="text-slate-700"><strong>Games:</strong> Murid melempar dadu digital via ponsel, mengamati pergerakan pion di layar, dan berdiskusi kelompok menjawab kuis daur hidup hewan[cite: 63].</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-3 items-start">
                         <span class="px-2.5 py-1 bg-amber-600 text-white font-bold rounded-lg text-xs flex-shrink-0">Sintak 4</span>
-                        <p class="text-slate-700"><strong>Tournament:</strong> Perwakilan kelompok bersaing menyelesaikan tantangan soal daur hidup hewan untuk mengumpulkan poin kemenangan tim.</p>
+                        <p class="text-slate-700"><strong>Tournament:</strong> Perwakilan kelompok bersaing menyelesaikan tantangan soal daur hidup hewan untuk mengumpulkan poin kemenangan tim[cite: 64].</p>
                     </div>
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-3 items-start">
                         <span class="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-xs flex-shrink-0">Sintak 5</span>
-                        <p class="text-slate-700"><strong>Team Recognition:</strong> Pengumuman pemenang secara otomatis berbasis rekapitulasi poin digital di layar dan pemberian penghargaan.</p>
+                        <p class="text-slate-700"><strong>Team Recognition:</strong> Pengumuman pemenang secara otomatis berbasis rekapitulasi poin digital di layar dan pemberian penghargaan[cite: 64].</p>
                     </div>
                 </div>
             </div>
@@ -359,11 +372,11 @@
                         <ul class="text-xs sm:text-sm text-slate-600 space-y-3">
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Asesmen Kognitif Individu:</strong> Lembar Kerja Peserta Didik (LKPD Mandiri) berisi soal menjodohkan dan pilihan ganda materi daur hidup hewan.</span>
+                                <span><strong>Asesmen Kognitif Individu:</strong> Lembar Kerja Peserta Didik (LKPD Mandiri) berisi soal menjodohkan dan pilihan ganda materi daur hidup hewan[cite: 65, 70].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Asesmen Sikap & Proses:</strong> Rubrik penilaian kerja sama kelompok, kemampuan bernalar kritis, dan kejujuran selama permainan berlangsung.</span>
+                                <span><strong>Asesmen Sikap & Proses:</strong> Rubrik penilaian kerja sama kelompok, kemampuan bernalar kritis, dan kejujuran selama permainan berlangsung[cite: 67].</span>
                             </li>
                         </ul>
                     </div>
@@ -373,15 +386,15 @@
                         <ul class="text-xs sm:text-sm text-slate-700 space-y-3">
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Terjadi peningkatan signifikan pada antusiasme dan partisipasi aktif seluruh murid di kelas.</span>
+                                <span>Terjadi peningkatan signifikan pada antusiasme dan partisipasi aktif seluruh murid di kelas[cite: 58, 63].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Suasana pembelajaran menjadi sangat menyenangkan (Joyful Learning) dan kolaboratif.</span>
+                                <span>Suasana pembelajaran menjadi sangat menyenangkan (Joyful Learning) dan kolaboratif[cite: 58, 61].</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Pemahaman konsep metamorfosis murid meningkat dibuktikan dengan pencapaian hasil tes LKPD yang optimal.</span>
+                                <span>Pemahaman konsep metamorfosis murid meningkat dibuktikan dengan pencapaian hasil tes LKPD yang optimal[cite: 60, 65].</span>
                             </li>
                         </ul>
                     </div>
@@ -391,7 +404,7 @@
 
     </main>
 
-    <!-- SCRIPT SISTEM NAVIGASI SLIDE -->
+    <!-- SCRIPT SISTEM NAVIGASI SLIDE & FULLSCREEN -->
     <script>
         let currentSlide = 1;
         const totalSlides = 7;
@@ -424,6 +437,19 @@
                 currentSlide = totalSlides;
             }
             updateSlideUI();
+        }
+
+        // FUNGSI TOGGLE FULLSCREEN
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    alert(`Gagal mengaktifkan mode layar penuh: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
 
         // DUKUNGAN NAVIGASI KEYBOARD (PANAH KIRI & KANAN)
