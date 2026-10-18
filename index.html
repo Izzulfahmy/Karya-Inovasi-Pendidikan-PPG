@@ -17,60 +17,25 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f8fafc;
-            overflow-x: hidden;
         }
         
         h1, h2, h3, h4, .font-heading {
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Container Slide untuk animasi geser horizontal */
-        #presentation-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Base style untuk semua slide */
+        /* Tampilan Slide Langsung Tanpa Efek Animasi */
         .slide-view {
             display: none;
-            opacity: 0;
             width: 100%;
-            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: transform, opacity;
         }
 
         .slide-view.active {
             display: block;
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Kelas Animasi Bergeser ke Kanan & Kiri */
-        .slide-out-left {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-
-        .slide-out-right {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-
-        .slide-in-right {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-
-        .slide-in-left {
-            transform: translateX(-100%);
-            opacity: 0;
         }
 
         /* Mode Cetak PDF Khusus */
         .pdf-export-mode .slide-view {
             display: block !important;
-            opacity: 1 !important;
-            transform: none !important;
             page-break-after: always;
             margin-bottom: 2rem;
         }
@@ -88,14 +53,14 @@
     <!-- POJOK KANAN ATAS: TOMBOL UNDUH PDF & FULLSCREEN -->
     <div class="fixed top-2 right-2 sm:top-3 sm:right-4 z-50 flex items-center gap-1.5">
         <!-- Tombol Unduh PDF -->
-        <button onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (PDF)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center">
+        <button onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (PDF)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
         </button>
 
         <!-- Tombol Fullscreen -->
-        <button onclick="toggleFullScreen()" aria-label="Layar Penuh" title="Layar Penuh" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center">
+        <button onclick="toggleFullScreen()" aria-label="Layar Penuh" title="Layar Penuh" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
             <svg id="fullscreen-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
             </svg>
@@ -103,13 +68,13 @@
     </div>
 
     <!-- NAVIGASI PANAH TIPIS MENGAPUNG (KIRI & KANAN) -->
-    <button onclick="prevSlide()" aria-label="Sebelumnya" class="fixed left-1 sm:left-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all duration-300 active:scale-90 cursor-pointer">
+    <button onclick="prevSlide()" aria-label="Sebelumnya" class="fixed left-1 sm:left-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
     </button>
 
-    <button onclick="nextSlide()" aria-label="Berikutnya" class="fixed right-1 sm:right-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all duration-300 active:scale-90 cursor-pointer">
+    <button onclick="nextSlide()" aria-label="Berikutnya" class="fixed right-1 sm:right-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
@@ -473,68 +438,35 @@
 
     </main>
 
-    <!-- SCRIPT NAVIGASI SLIDE BERGESER (HORIZONTAL SLIDE ANIMATION) -->
+    <!-- SCRIPT NAVIGASI SLIDE LANGSUNG (INSTANT SWITCH) -->
     <script>
         let currentSlide = 1;
         const totalSlides = 8;
-        let isAnimating = false;
 
-        function navigateSlide(targetSlide, direction) {
-            if (isAnimating || targetSlide === currentSlide) return;
-            isAnimating = true;
-
-            const currentElement = document.getElementById('slide-' + currentSlide);
-            const targetElement = document.getElementById('slide-' + targetSlide);
-
-            if (!currentElement || !targetElement) {
-                isAnimating = false;
-                return;
+        function updateSlideUI() {
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById('slide-' + i);
+                if (slide) {
+                    slide.classList.remove('active');
+                }
             }
 
-            // Atur posisi awal slide target sebelum animasi dimulai
-            targetElement.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
-            if (direction === 'next') {
-                targetElement.classList.add('slide-in-right');
-            } else {
-                targetElement.classList.add('slide-in-left');
-            }
-            targetElement.style.display = 'block';
-
-            // Trigger reflow agar style awal terpasang
-            void targetElement.offsetWidth;
-
-            // Jalankan animasi transisi geser
-            if (direction === 'next') {
-                currentElement.classList.add('slide-out-left');
-                targetElement.classList.remove('slide-in-right');
-                targetElement.classList.add('active');
-            } else {
-                currentElement.classList.add('slide-out-right');
-                targetElement.classList.remove('slide-in-left');
-                targetElement.classList.add('active');
+            const activeSlide = document.getElementById('slide-' + currentSlide);
+            if (activeSlide) {
+                activeSlide.classList.add('active');
             }
 
-            // Selesaikan transisi
-            setTimeout(() => {
-                currentElement.classList.remove('active', 'slide-out-left', 'slide-out-right');
-                currentElement.style.display = 'none';
-
-                targetElement.classList.remove('slide-in-right', 'slide-in-left');
-                currentSlide = targetSlide;
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                isAnimating = false;
-            }, 450);
+            window.scrollTo({ top: 0 });
         }
 
         function nextSlide() {
-            let nextNum = currentSlide < totalSlides ? currentSlide + 1 : 1;
-            navigateSlide(nextNum, 'next');
+            currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+            updateSlideUI();
         }
 
         function prevSlide() {
-            let prevNum = currentSlide > 1 ? currentSlide - 1 : totalSlides;
-            navigateSlide(prevNum, 'prev');
+            currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides;
+            updateSlideUI();
         }
 
         // TOGGLE FULLSCREEN
