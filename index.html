@@ -154,6 +154,16 @@
         let currentSlide = 1;
         let totalSlides = 0;
 
+        // DAFTAR URUTAN TAB KONTEN
+        const tabsList = [
+            'beranda.html',
+            'visi-pribadi.html',
+            'refleksi-pengalaman.html',
+            'karya-inovasi.html'
+        ];
+
+        let currentTabIndex = 0;
+
         // LOAD FILE KONTEN KE DALAM CONTAINER MAIN
         async function loadTabContent(filePath) {
             try {
@@ -162,6 +172,15 @@
                 const html = await response.text();
                 document.getElementById('presentation-container').innerHTML = html;
                 
+                // Perbarui Indeks Tab Aktif
+                currentTabIndex = tabsList.indexOf(filePath);
+
+                // Tampilkan / Sembunyikan Tombol Panah Navigasi khusus Tab Beranda
+                const prevBtn = document.querySelector('button[onclick="prevSlide()"]');
+                const nextBtn = document.querySelector('button[onclick="nextSlide()"]');
+                if (prevBtn) prevBtn.style.display = filePath.includes('beranda') ? 'none' : 'flex';
+                if (nextBtn) nextBtn.style.display = filePath.includes('beranda') ? 'none' : 'flex';
+
                 // Hitung Ulang Total Slide
                 const slides = document.querySelectorAll('.slide-view');
                 totalSlides = slides.length;
@@ -176,26 +195,34 @@
             }
         }
 
-        // PERALIHAN TAB & PENGATURAN STYLE AKTIF (IKON VS TEKS)
+        // PERALIHAN TAB SECARA MANUAL
         function switchTab(filePath, btnElement) {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                if (btn.ariaLabel === "Beranda") {
-                    btn.className = 'tab-btn p-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer flex items-center justify-center';
-                } else {
-                    btn.className = 'tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap';
-                }
-            });
-
-            if (btnElement.ariaLabel === "Beranda") {
-                btnElement.className = 'tab-btn active p-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer flex items-center justify-center';
-            } else {
-                btnElement.className = 'tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap';
-            }
-
+            updateTabButtonsUI(filePath);
             loadTabContent(filePath);
         }
 
-        // UPDATE TAMPILAN SLIDE
+        // UPDATE TAMPILAN TOMBOL TAB DI HEADER
+        function updateTabButtonsUI(filePath) {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                const isBeranda = btn.ariaLabel === "Beranda";
+                const btnTargetFile = isBeranda ? 'beranda.html' : 
+                    (btn.textContent.includes('Visi') ? 'visi-pribadi.html' : 
+                    (btn.textContent.includes('Refleksi') ? 'refleksi-pengalaman.html' : 'karya-inovasi.html'));
+
+                if (btnTargetFile === filePath) {
+                    btn.className = isBeranda 
+                        ? 'tab-btn active p-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer flex items-center justify-center'
+                        : 'tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap';
+                } else {
+                    btn.className = isBeranda 
+                        ? 'tab-btn p-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer flex items-center justify-center'
+                        : 'tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap';
+                }
+            });
+        }
+
+        // UPDATE TAMPILAN SLIDE AKTIFF
         function updateSlideUI() {
             const slides = document.querySelectorAll('.slide-view');
             slides.forEach((slide, index) => {
@@ -208,16 +235,34 @@
             window.scrollTo({ top: 0 });
         }
 
+        // LOGIKA TOMBOL PANAH BERIKUTNYA (SWITCH TAB OTOMATIS SAAT SLIDE HABIS)
         function nextSlide() {
             if (totalSlides === 0) return;
-            currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
-            updateSlideUI();
+
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlideUI();
+            } else {
+                const nextTabIndex = (currentTabIndex + 1) % tabsList.length;
+                const nextFilePath = tabsList[nextTabIndex];
+                updateTabButtonsUI(nextFilePath);
+                loadTabContent(nextFilePath);
+            }
         }
 
+        // LOGIKA TOMBOL PANAH SEBELUMNYA (KEMBALI TAB OTOMATIS)
         function prevSlide() {
             if (totalSlides === 0) return;
-            currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides;
-            updateSlideUI();
+
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlideUI();
+            } else {
+                const prevTabIndex = (currentTabIndex - 1 + tabsList.length) % tabsList.length;
+                const prevFilePath = tabsList[prevTabIndex];
+                updateTabButtonsUI(prevFilePath);
+                loadTabContent(prevFilePath);
+            }
         }
 
         // TOGGLE FULLSCREEN
