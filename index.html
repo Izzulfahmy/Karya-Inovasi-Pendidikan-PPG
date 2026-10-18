@@ -17,25 +17,53 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f8fafc;
+            overflow-x: hidden;
         }
         
         h1, h2, h3, h4, .font-heading {
             font-family: 'Outfit', sans-serif;
         }
 
-        /* sistem animasi perpindahan slide */
+        /* Container Slide untuk animasi geser horizontal */
+        #presentation-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Base style untuk semua slide */
         .slide-view {
             display: none;
             opacity: 0;
-            transform: translateY(20px) scale(0.97);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
+            width: 100%;
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform, opacity;
         }
 
         .slide-view.active {
             display: block;
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateX(0);
+        }
+
+        /* Kelas Animasi Bergeser ke Kanan & Kiri */
+        .slide-out-left {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        .slide-out-right {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .slide-in-right {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .slide-in-left {
+            transform: translateX(-100%);
+            opacity: 0;
         }
 
         /* Mode Cetak PDF Khusus */
@@ -47,7 +75,7 @@
             margin-bottom: 2rem;
         }
 
-        /* Clean Card Design dengan Margin Lebih Tipis */
+        /* Clean Card Design */
         .clean-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -87,7 +115,7 @@
         </svg>
     </button>
 
-    <!-- CONTAINER UTAMA KONTEN SLIDE (LEBIH LEBAR DAN PADDING CARD LEBIH TIPIS) -->
+    <!-- CONTAINER UTAMA KONTEN SLIDE -->
     <main id="presentation-container" class="w-full max-w-6xl mx-auto my-auto">
 
         <!-- ==================== SLIDE 1 ==================== -->
@@ -258,7 +286,7 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 5: RISET & PROTOTIPE MEDIA ==================== -->
+        <!-- ==================== SLIDE 5 ==================== -->
         <div id="slide-5" class="slide-view">
             <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
                 <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
@@ -272,7 +300,7 @@
                     </h2>
                 </div>
 
-                <!-- GALERI SCREENSHOT LEBIH BESAR -->
+                <!-- GALERI SCREENSHOT -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                     <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
                         <img src="tampilaninovasi/halamanawal.png" alt="Halaman Awal Permainan" class="w-full h-36 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-300">
@@ -445,47 +473,68 @@
 
     </main>
 
-    <!-- SCRIPT NAVIGASI SLIDE, FULLSCREEN, DENGAN ANIMASI PERPINDAHAN -->
+    <!-- SCRIPT NAVIGASI SLIDE BERGESER (HORIZONTAL SLIDE ANIMATION) -->
     <script>
         let currentSlide = 1;
         const totalSlides = 8;
         let isAnimating = false;
 
-        function updateSlideUI(nextSlideNum) {
-            if (isAnimating || nextSlideNum === currentSlide) return;
+        function navigateSlide(targetSlide, direction) {
+            if (isAnimating || targetSlide === currentSlide) return;
             isAnimating = true;
 
             const currentElement = document.getElementById('slide-' + currentSlide);
-            const nextElement = document.getElementById('slide-' + nextSlideNum);
+            const targetElement = document.getElementById('slide-' + targetSlide);
 
-            if (currentElement && nextElement) {
-                currentElement.style.opacity = '0';
-                currentElement.style.transform = 'translateY(-15px) scale(0.97)';
-
-                setTimeout(() => {
-                    currentElement.classList.remove('active');
-                    currentElement.style.transform = '';
-
-                    nextElement.classList.add('active');
-                    void nextElement.offsetWidth;
-
-                    currentSlide = nextSlideNum;
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    isAnimating = false;
-                }, 300);
-            } else {
+            if (!currentElement || !targetElement) {
                 isAnimating = false;
+                return;
             }
+
+            // Atur posisi awal slide target sebelum animasi dimulai
+            targetElement.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-left', 'slide-out-right');
+            if (direction === 'next') {
+                targetElement.classList.add('slide-in-right');
+            } else {
+                targetElement.classList.add('slide-in-left');
+            }
+            targetElement.style.display = 'block';
+
+            // Trigger reflow agar style awal terpasang
+            void targetElement.offsetWidth;
+
+            // Jalankan animasi transisi geser
+            if (direction === 'next') {
+                currentElement.classList.add('slide-out-left');
+                targetElement.classList.remove('slide-in-right');
+                targetElement.classList.add('active');
+            } else {
+                currentElement.classList.add('slide-out-right');
+                targetElement.classList.remove('slide-in-left');
+                targetElement.classList.add('active');
+            }
+
+            // Selesaikan transisi
+            setTimeout(() => {
+                currentElement.classList.remove('active', 'slide-out-left', 'slide-out-right');
+                currentElement.style.display = 'none';
+
+                targetElement.classList.remove('slide-in-right', 'slide-in-left');
+                currentSlide = targetSlide;
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                isAnimating = false;
+            }, 450);
         }
 
         function nextSlide() {
             let nextNum = currentSlide < totalSlides ? currentSlide + 1 : 1;
-            updateSlideUI(nextNum);
+            navigateSlide(nextNum, 'next');
         }
 
         function prevSlide() {
             let prevNum = currentSlide > 1 ? currentSlide - 1 : totalSlides;
-            updateSlideUI(prevNum);
+            navigateSlide(prevNum, 'prev');
         }
 
         // TOGGLE FULLSCREEN
