@@ -23,7 +23,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Tampilan Slide Langsung Tanpa Efek Animasi */
+        /* Tampilan Slide Langsung Tanpa Efek Animasi Transisi Transparan */
         .slide-view {
             display: none;
             width: 100%;
@@ -38,17 +38,23 @@
             display: block !important;
             page-break-after: always;
             margin-bottom: 2rem;
+            height: auto !important;
+            min-height: 0 !important;
         }
 
-        /* Clean Card Design */
+        /* Clean Card Design dengan Ukuran Tinggi Seragam */
         .clean-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             box-shadow: 0 10px 25px -5px rgba(148, 163, 184, 0.1), 0 8px 10px -6px rgba(148, 163, 184, 0.1);
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex items-center justify-center relative px-2 sm:px-6 py-3 selection:bg-blue-600 selection:text-white">
+<body class="text-slate-800 antialiased min-h-screen flex items-center justify-center relative px-2 sm:px-6 py-4 selection:bg-blue-600 selection:text-white">
 
     <!-- POJOK KANAN ATAS: TOMBOL UNDUH PDF & FULLSCREEN -->
     <div class="fixed top-2 right-2 sm:top-3 sm:right-4 z-50 flex items-center gap-1.5">
@@ -85,18 +91,25 @@
 
         <!-- ==================== SLIDE 1 ==================== -->
         <div id="slide-1" class="slide-view active">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative overflow-hidden">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    01 / 08
-                </span>
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-extrabold border border-blue-100">
+                            DESAIN KARYA INOVASI PENDIDIKAN
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            01 / 08
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-4 leading-tight">
+                        Media Ular Tangga Digital model pembelajaran Kooperatif learning tipe Teams Games Tournament (TGT) untuk Meningkatkan Motivasi Belajar IPAS Siswa Kelas III Sekolah Dasar
+                    </h1>
 
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-extrabold mb-4 border border-blue-100">
-                    DESAIN KARYA INOVASI PENDIDIKAN
+                    <div class="p-4 rounded-xl bg-blue-50/60 border border-blue-100 mb-6 text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">
+                        <strong>Deskripsi Singkat Karya:</strong> Inovasi ini mentransformasi media game konvensional menjadi platform permainan digital interaktif berbasis web. Terkoneksi langsung dengan sistem kendali ponsel pintar kelompok via pemindaian QR Code, media ini memadukan keseruan turnamen kooperatif dengan penguatan materi daur hidup hewan secara berkesadaran, bermakna, dan menyenangkan.
+                    </div>
                 </div>
-                
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-8 leading-tight">
-                    Media Ular Tangga Digital model pembelajaran Kooperatif learning tipe Teams Games Tournament (TGT) untuk Meningkatkan Motivasi Belajar IPAS Siswa Kelas III Sekolah Dasar
-                </h1>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm pt-4 border-t border-slate-100">
                     <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
@@ -104,7 +117,7 @@
                         <p class="font-bold text-slate-900 text-base">Ilmu Pengetahuan Alam dan Sosial (IPAS)</p>
                         <div class="pt-1 text-slate-600 space-y-1">
                             <p><strong>Bab 4:</strong> Siklus Hidup yang Menakjubkan</p>
-                            <p><strong>Topik:</strong> Rahasia Kehidupan Hewan</p>
+                            <p><strong>Topik:</strong> Rahasia Kehidupan Hewan (Metamorfosis)</p>
                         </div>
                     </div>
 
@@ -122,354 +135,396 @@
 
         <!-- ==================== SLIDE 2 ==================== -->
         <div id="slide-2" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    02 / 08
-                </span>
-
-                <div class="mb-5 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Analisis Lapangan</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Analisis Lapangan</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            02 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-6">
                         Identifikasi Kebutuhan & Tantangan Pembelajaran
                     </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">01</div>
+                            <h3 class="font-bold text-slate-900 text-base">Kondisi Riil Pembelajaran</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Materi IPAS tentang daur hidup hewan dan metamorfosis sering kali disajikan secara konvensional melalui hafalan teks dan gambar 2D statis. Hal ini membuat tahapan perubahan wujud hewan sulit dibayangkan secara konkret oleh anak usia 8-9 tahun.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">02</div>
+                            <h3 class="font-bold text-slate-900 text-base">Tantangan Utama di Kelas</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Terjadi penurunan motivasi belajar, perhatian murid yang cepat teralih, serta minimnya interaksi kolaboratif. Metode ceramah satu arah gagal mengakomodasi karakteristik murid SD yang menyukai aktivitas permainan dan tantangan.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">03</div>
+                            <h3 class="font-bold text-slate-900 text-base">Kebutuhan Solusi Inovatif</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Diperlukan media pembelajaran interaktif berbasis teknologi yang kontekstual dan mampu memfasilitasi tiga pilar pembelajaran mendalam: Mindful, Meaningful, dan Joyful Learning.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">01</div>
-                        <h3 class="font-bold text-slate-900 text-base">Kondisi Riil Pembelajaran</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Materi IPAS tentang daur hidup hewan dan metamorfosis sering kali disajikan secara konvensional melalui hafalan teks dan gambar 2D statis. Hal ini membuat tahapan perubahan wujud hewan sulit dibayangkan secara konkret oleh anak usia 8-9 tahun.
-                        </p>
-                    </div>
-
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm">02</div>
-                        <h3 class="font-bold text-slate-900 text-base">Tantangan Utama di Kelas</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Terjadi penurunan motivasi belajar, perhatian murid yang cepat teralih, serta minimnya interaksi kolaboratif. Metode ceramah satu arah gagal mengakomodasi karakteristik murid SD yang menyukai aktivitas permainan dan tantangan.
-                        </p>
-                    </div>
-
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">03</div>
-                        <h3 class="font-bold text-slate-900 text-base">Kebutuhan Solusi Inovatif</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Diperlukan media pembelajaran interaktif berbasis teknologi yang kontekstual dan mampu memfasilitasi tiga pilar pembelajaran mendalam: Mindful, Meaningful, dan Joyful Learning.
-                        </p>
-                    </div>
+                <div class="pt-4 border-t border-slate-100 mt-4 text-xs text-slate-500 font-medium text-center">
+                    Fokus Utama: Mengubah tantangan pembelajaran teoretis abstrak menjadi pengalaman kontekstual yang menyenangkan.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 3 ==================== -->
         <div id="slide-3" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    03 / 08
-                </span>
-
-                <div class="mb-5 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Gagasan Kreatif</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Gagasan Kreatif</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            03 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-6">
                         Perumusan Gagasan Solusi & Tujuan Inovasi
                     </h2>
-                </div>
 
-                <div class="space-y-4">
-                    <div class="p-5 rounded-xl bg-blue-50/70 border border-blue-100">
-                        <h3 class="font-bold text-blue-900 text-base sm:text-lg mb-1">Gagasan Solusi Inovatif</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">
-                            Mengembangkan media permainan papan tradisional yang ditransformasikan ke dalam format <strong>Ular Tangga Digital Interaktif</strong> berbasis web, kemudian dipadukan dengan model pembelajaran kooperatif tipe <strong>Teams Games Tournament (TGT)</strong>.
-                        </p>
-                    </div>
+                    <div class="space-y-4">
+                        <div class="p-5 rounded-xl bg-blue-50/70 border border-blue-100">
+                            <h3 class="font-bold text-blue-900 text-base sm:text-lg mb-1">Gagasan Solusi Inovatif</h3>
+                            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">
+                                Mengembangkan media permainan papan tradisional yang ditransformasikan ke dalam format <strong>Ular Tangga Digital Interaktif</strong> berbasis web, kemudian dipadukan dengan model pembelajaran kooperatif tipe <strong>Teams Games Tournament (TGT)</strong>.
+                            </p>
+                        </div>
 
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <h3 class="font-bold text-slate-900 text-base">Rumusan Tujuan Inovasi Pendidikan:</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-                            <div class="p-4 bg-white rounded-xl border border-slate-200">
-                                <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 1</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Meningkatkan motivasi, rasa ingin tahu, dan antusiasme aktif murid selama proses pembelajaran IPAS.</p>
-                            </div>
-                            <div class="p-4 bg-white rounded-xl border border-slate-200">
-                                <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 2</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Memudahkan pemahaman konsep daur hidup hewan (tanpa metamorfosis, metamorfosis sempurna, & tidak sempurna).</p>
-                            </div>
-                            <div class="p-4 bg-white rounded-xl border border-slate-200">
-                                <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 3</span>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium">Menguatkan sikap sosial murid seperti bekerja sama, bernalar kritis, dan kejujuran dalam kelompok.</p>
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <h3 class="font-bold text-slate-900 text-base">Rumusan Tujuan Inovasi Pendidikan:</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+                                <div class="p-4 bg-white rounded-xl border border-slate-200">
+                                    <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 1</span>
+                                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Meningkatkan motivasi, rasa ingin tahu, dan antusiasme aktif murid selama proses pembelajaran IPAS.</p>
+                                </div>
+                                <div class="p-4 bg-white rounded-xl border border-slate-200">
+                                    <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 2</span>
+                                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Memudahkan pemahaman konsep daur hidup hewan (tanpa metamorfosis, metamorfosis sempurna, & tidak sempurna).</p>
+                                </div>
+                                <div class="p-4 bg-white rounded-xl border border-slate-200">
+                                    <span class="text-blue-600 font-extrabold text-xs block mb-1">Tujuan 3</span>
+                                    <p class="text-xs sm:text-sm text-slate-700 font-medium">Menguatkan sikap sosial murid seperti bekerja sama, bernalar kritis, dan kejujuran dalam kelompok.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 mt-4 text-xs text-slate-500 font-medium text-center">
+                    Kombinasi game edukasi digital dan TGT menciptakan lingkungan belajar kompetitif secara sehat dan kolaboratif.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 4 ==================== -->
         <div id="slide-4" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    04 / 08
-                </span>
-
-                <div class="mb-5 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Keunggulan Produk</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Keunggulan Produk</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            04 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-6">
                         Prinsip & Nilai Kebaruan Karya Inovasi
                     </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">01</div>
+                            <h3 class="font-bold text-slate-900 text-base">Kebaruan (Novelty)</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Papan permainan terhubung langsung ke layar proyektor/IFP utama dan dioperasikan menggunakan ponsel kelompok sebagai remote pengendali melempar dadu digital via pemindaian QR Code.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">02</div>
+                            <h3 class="font-bold text-slate-900 text-base">Kreativitas & Relevansi</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Sistem permainan mengintegrasikan alur kuis pilihan ganda yang otomatis muncul saat pion mendarat di petak tertentu, selaras dengan Capaian Pembelajaran IPAS Kurikulum Merdeka.
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">03</div>
+                            <h3 class="font-bold text-slate-900 text-base">Kebermanfaatan & Efektivitas</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                                Otomasi acakan angka dadu, pergerakan pion, dan rekapitulasi poin tim secara otomatis di layar utama menghemat waktu guru dan memberikan umpan balik langsung pada siswa.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">01</div>
-                        <h3 class="font-bold text-slate-900 text-base">Kebaruan (Novelty)</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Papan permainan terhubung langsung ke layar proyektor/IFP utama dan dioperasikan menggunakan ponsel kelompok sebagai remote pengendali melempar dadu digital via pemindaian QR Code.
-                        </p>
-                    </div>
-
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">02</div>
-                        <h3 class="font-bold text-slate-900 text-base">Kreativitas & Relevansi</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Sistem permainan mengintegrasikan alur kuis pilihan ganda yang otomatis muncul saat pion mendarat di petak tertentu, selaras dengan Capaian Pembelajaran IPAS Kurikulum Merdeka.
-                        </p>
-                    </div>
-
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">03</div>
-                        <h3 class="font-bold text-slate-900 text-base">Kebermanfaatan & Efektivitas</h3>
-                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
-                            Otomasi acakan angka dadu, pergerakan pion, dan rekapitulasi poin tim secara otomatis di layar utama menghemat waktu guru dan memberikan umpan balik langsung pada siswa.
-                        </p>
-                    </div>
+                <div class="pt-4 border-t border-slate-100 mt-4 text-xs text-slate-500 font-medium text-center">
+                    Efisiensi Waktu & Interaktivitas Tinggi: Menggabungkan keseruan teknologi fisik dan digital secara seamless.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 5: PROTOTIPE & AKSES MEDIA DENGAN QR CODE ==================== -->
         <div id="slide-5" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    05 / 08
-                </span>
-
-                <div class="mb-4 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Arsitektur & Tampilan Media</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Arsitektur & Tampilan Media</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            05 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-4">
                         Riset Sederhana & Prototipe Media Digital
                     </h2>
+
+                    <!-- GALERI SCREENSHOT -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                        <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
+                            <img src="tampilaninovasi/halamanawal.png" alt="Halaman Awal Permainan" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-2 bg-white text-center border-t border-slate-100">
+                                <span class="text-xs font-bold text-slate-800 block">1. Halaman Awal & QR Code</span>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
+                            <img src="tampilaninovasi/halamanpengaturan.png" alt="Halaman Pengaturan" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-2 bg-white text-center border-t border-slate-100">
+                                <span class="text-xs font-bold text-slate-800 block">2. Pengaturan Kelompok</span>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
+                            <img src="tampilaninovasi/materi.png" alt="Modul Materi" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-2 bg-white text-center border-t border-slate-100">
+                                <span class="text-xs font-bold text-slate-800 block">3. Modul Pembelajaran</span>
+                            </div>
+                        </div>
+
+                        <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
+                            <img src="tampilaninovasi/papanulartangga.png" alt="Papan Ular Tangga" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="p-2 bg-white text-center border-t border-slate-100">
+                                <span class="text-xs font-bold text-slate-800 block">4. Papan Game & Pop-up Kuis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DESKRIPSI RANCANGAN & AKSES MEDIA BESERTA QR CODE STATIS -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                        <div class="md:col-span-8 p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+                            <h3 class="font-bold text-slate-900 text-xs sm:text-sm">Rancangan & Integrasi Sistem:</h3>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li>• <strong>Model Pembelajaran:</strong> Cooperative Learning tipe TGT (Teams Games Tournament).</li>
+                                <li>• <strong>Remote Control Ponsel:</strong> Pemindaian QR Code di layar utama untuk melempar dadu.</li>
+                                <li>• <strong>Kuis Otomatis & Skor:</strong> Pop-up kuis daur hidup hewan dan skor otomatis real-time.</li>
+                                <li class="pt-1">• <strong>Alamat Akses Media:</strong> <a href="https://ular-tangga-digital.vercel.app/" target="_blank" class="text-blue-600 font-bold underline break-all">https://ular-tangga-digital.vercel.app/</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- KOTAK QR CODE STATIS APLIKASI -->
+                        <div class="md:col-span-4 p-3 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between sm:justify-center gap-3">
+                            <div class="p-1.5 bg-white rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://ular-tangga-digital.vercel.app/" alt="QR Code Permainan Ular Tangga Digital" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
+                            </div>
+                            <div class="space-y-1 text-left">
+                                <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Pindai Media</span>
+                                <p class="text-xs font-bold text-slate-900 leading-snug">Ular Tangga Digital</p>
+                                <p class="text-[10px] text-slate-500">Scan QR Code ini untuk mencoba aplikasi.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- GALERI SCREENSHOT -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                    <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <img src="tampilaninovasi/halamanawal.png" alt="Halaman Awal Permainan" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-2 bg-white text-center border-t border-slate-100">
-                            <span class="text-xs font-bold text-slate-800 block">1. Halaman Awal & QR Code</span>
-                        </div>
-                    </div>
-
-                    <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <img src="tampilaninovasi/halamanpengaturan.png" alt="Halaman Pengaturan" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-2 bg-white text-center border-t border-slate-100">
-                            <span class="text-xs font-bold text-slate-800 block">2. Pengaturan Kelompok</span>
-                        </div>
-                    </div>
-
-                    <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <img src="tampilaninovasi/materi.png" alt="Modul Materi" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-2 bg-white text-center border-t border-slate-100">
-                            <span class="text-xs font-bold text-slate-800 block">3. Modul Pembelajaran</span>
-                        </div>
-                    </div>
-
-                    <div class="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <img src="tampilaninovasi/papanulartangga.png" alt="Papan Ular Tangga" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
-                        <div class="p-2 bg-white text-center border-t border-slate-100">
-                            <span class="text-xs font-bold text-slate-800 block">4. Papan Game & Pop-up Kuis</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DESKRIPSI RANCANGAN & AKSES MEDIA BESERTA QR CODE STATIS -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-                    <div class="md:col-span-8 p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
-                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm">Rancangan & Integrasi Sistem:</h3>
-                        <ul class="text-xs text-slate-600 space-y-1">
-                            <li>• <strong>Model Pembelajaran:</strong> Cooperative Learning tipe TGT (Teams Games Tournament).</li>
-                            <li>• <strong>Remote Control Ponsel:</strong> Pemindaian QR Code di layar utama untuk melempar dadu.</li>
-                            <li>• <strong>Kuis Otomatis & Skor:</strong> Pop-up kuis daur hidup hewan dan skor otomatis real-time.</li>
-                            <li class="pt-1">• <strong>Alamat Akses Media:</strong> <a href="https://ular-tangga-digital.vercel.app/" target="_blank" class="text-blue-600 font-bold underline break-all">https://ular-tangga-digital.vercel.app/</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- KOTAK QR CODE STATIS APLIKASI -->
-                    <div class="md:col-span-4 p-3 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between sm:justify-center gap-3">
-                        <div class="p-1.5 bg-white rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://ular-tangga-digital.vercel.app/" alt="QR Code Permainan Ular Tangga Digital" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
-                        </div>
-                        <div class="space-y-1 text-left">
-                            <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Pindai Media</span>
-                            <p class="text-xs font-bold text-slate-900 leading-snug">Ular Tangga Digital</p>
-                            <p class="text-[10px] text-slate-500">Scan QR Code ini untuk mencoba aplikasi.</p>
-                        </div>
-                    </div>
+                <div class="pt-3 border-t border-slate-100 mt-2 text-xs text-slate-500 font-medium text-center">
+                    Aplikasi web responsif yang kompatibel diakses melalui Layar Proyektor, IFP, Komputer, maupun Smartphone.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 6: IMPLEMENTASI & INTEGRASI PDF RPM + QR CODE ==================== -->
         <div id="slide-6" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    06 / 08
-                </span>
-
-                <div class="mb-4 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Praktik Lapangan & Dokumen</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Praktik Lapangan & Dokumen</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            06 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-4">
                         Implementasi Pembelajaran & Lampiran RPM
                     </h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                        <!-- SISI SINTAK PEMBELAJARAN (SISI KIRI) -->
+                        <div class="lg:col-span-6 space-y-2">
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
+                                <span class="px-2 py-0.5 bg-blue-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 1</span>
+                                <p class="text-slate-700"><strong>Class Presentation:</strong> Menyajikan materi daur hidup hewan di layar proyektor utama.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
+                                <span class="px-2 py-0.5 bg-indigo-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 2</span>
+                                <p class="text-slate-700"><strong>Teams:</strong> Murid dibagi tim dan memindai QR Code menggunakan ponsel pengendali.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
+                                <span class="px-2 py-0.5 bg-purple-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 3</span>
+                                <p class="text-slate-700"><strong>Games:</strong> Melempar dadu via HP, mengamati pion, dan menjawab kuis kelompok.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
+                                <span class="px-2 py-0.5 bg-amber-600 text-white font-bold rounded-lg text-[11px] flex-shrink-0">Sintak 4</span>
+                                <p class="text-slate-700"><strong>Tournament:</strong> Perwakilan kelompok bersaing menyelesaikan tantangan soal.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
+                                <span class="px-2 py-0.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px] flex-shrink-0">Sintak 5</span>
+                                <p class="text-slate-700"><strong>Team Recognition:</strong> Pengumuman pemenang otomatis dan pemberian apresiasi.</p>
+                            </div>
+                        </div>
+
+                        <!-- KOTAK DOKUMEN PDF RPM SCROLLABLE & QR CODE DOKUMEN (SISI KANAN) -->
+                        <div class="lg:col-span-6 flex flex-col space-y-2">
+                            <!-- BANNER PRATINJAU DOKUMEN PDF -->
+                            <div class="flex flex-col bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex-grow min-h-[260px]">
+                                <div class="p-2.5 bg-white border-b border-slate-200 flex items-center justify-between">
+                                    <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4 text-blue-600">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+                                        Lampiran RPM (Rancangan Pembelajaran)
+                                    </span>
+                                    <a href="https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/view?usp=sharing" target="_blank" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 underline flex items-center gap-1">
+                                        Buka Tab Baru
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18m0 0v5.25M18 6l-7.5 7.5M6 18h12" />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <iframe 
+                                    src="https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/preview" 
+                                    class="w-full flex-grow border-0 rounded-b-xl min-h-[200px]" 
+                                    allow="autoplay"
+                                    title="Dokumen RPM">
+                                </iframe>
+                            </div>
+
+                            <!-- KOTAK QR CODE LINK KE GOOGLE DRIVE RPM -->
+                            <div class="p-2.5 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between gap-3">
+                                <div class="p-1 bg-white rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/view?usp=sharing" alt="QR Code Dokumen RPM Google Drive" class="w-12 h-12 sm:w-14 sm:h-14 object-contain">
+                                </div>
+                                <div class="space-y-0.5 text-left flex-grow">
+                                    <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Akses Dokumen RPM</span>
+                                    <p class="text-xs font-bold text-slate-900 leading-snug">Rancangan Pembelajaran (Google Drive)</p>
+                                    <p class="text-[10px] text-slate-500">Pindai QR Code untuk membaca / mengunduh file PDF lengkap.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-                    <!-- SISI SINTAK PEMBELAJARAN (SISI KIRI) -->
-                    <div class="lg:col-span-6 space-y-2">
-                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
-                            <span class="px-2 py-0.5 bg-blue-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 1</span>
-                            <p class="text-slate-700"><strong>Class Presentation:</strong> Menyajikan materi daur hidup hewan di layar proyektor utama.</p>
-                        </div>
-                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
-                            <span class="px-2 py-0.5 bg-indigo-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 2</span>
-                            <p class="text-slate-700"><strong>Teams:</strong> Murid dibagi tim dan memindai QR Code menggunakan ponsel pengendali.</p>
-                        </div>
-                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
-                            <span class="px-2 py-0.5 bg-purple-600 text-white font-bold rounded-md text-[11px] flex-shrink-0">Sintak 3</span>
-                            <p class="text-slate-700"><strong>Games:</strong> Melempar dadu via HP, mengamati pion, dan menjawab kuis kelompok.</p>
-                        </div>
-                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
-                            <span class="px-2 py-0.5 bg-amber-600 text-white font-bold rounded-lg text-[11px] flex-shrink-0">Sintak 4</span>
-                            <p class="text-slate-700"><strong>Tournament:</strong> Perwakilan kelompok bersaing menyelesaikan tantangan soal.</p>
-                        </div>
-                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm flex gap-2.5 items-start">
-                            <span class="px-2 py-0.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px] flex-shrink-0">Sintak 5</span>
-                            <p class="text-slate-700"><strong>Team Recognition:</strong> Pengumuman pemenang otomatis dan pemberian apresiasi.</p>
-                        </div>
-                    </div>
-
-                    <!-- KOTAK DOKUMEN PDF RPM SCROLLABLE & QR CODE DOKUMEN (SISI KANAN) -->
-                    <div class="lg:col-span-6 flex flex-col space-y-2">
-                        <!-- BANNER PRATINJAU DOKUMEN PDF -->
-                        <div class="flex flex-col bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex-grow min-h-[280px]">
-                            <div class="p-2.5 bg-white border-b border-slate-200 flex items-center justify-between">
-                                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4 text-blue-600">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                    </svg>
-                                    Lampiran RPM (Rancangan Pembelajaran)
-                                </span>
-                                <a href="https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/view?usp=sharing" target="_blank" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 underline flex items-center gap-1">
-                                    Buka Tab Baru
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18m0 0v5.25M18 6l-7.5 7.5M6 18h12" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <iframe 
-                                src="https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/preview" 
-                                class="w-full flex-grow border-0 rounded-b-xl min-h-[220px]" 
-                                allow="autoplay"
-                                title="Dokumen RPM">
-                            </iframe>
-                        </div>
-
-                        <!-- KOTAK QR CODE LINK KE GOOGLE DRIVE RPM -->
-                        <div class="p-2.5 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between gap-3">
-                            <div class="p-1 bg-white rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://drive.google.com/file/d/1bR3QC5S6xXXefl18424jcT6WFqk_k8fr/view?usp=sharing" alt="QR Code Dokumen RPM Google Drive" class="w-14 h-14 sm:w-16 sm:h-16 object-contain">
-                            </div>
-                            <div class="space-y-0.5 text-left flex-grow">
-                                <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Akses Dokumen RPM</span>
-                                <p class="text-xs font-bold text-slate-900 leading-snug">Rancangan Pembelajaran (Google Drive)</p>
-                                <p class="text-[10px] text-slate-500">Pindai QR Code untuk mengunduh / membaca file PDF lengkap.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="pt-3 border-t border-slate-100 mt-2 text-xs text-slate-500 font-medium text-center">
+                    Pelaksanaan sintak kooperatif TGT terintegrasi penuh dengan dokumen pedoman modul ajar RPM.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 7 ==================== -->
         <div id="slide-7" class="slide-view">
-            <div class="clean-card rounded-2xl p-5 sm:p-8 relative">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    07 / 08
-                </span>
-
-                <div class="mb-5 pb-3 border-b border-slate-100">
-                    <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Pengukuran Hasil</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
+            <div class="clean-card rounded-2xl p-6 sm:p-8 relative">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Pengukuran Hasil</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            07 / 08
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 pb-3 border-b border-slate-100 mb-6">
                         Tahapan Evaluasi & Dampak Keberhasilan
                     </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-3">
+                            <h3 class="font-bold text-slate-900 text-base">Instrumen Evaluasi Pembelajaran:</h3>
+                            <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
+                                    <span><strong>Asesmen Kognitif Individu:</strong> Lembar Kerja Peserta Didik (LKPD Mandiri) berisi soal menjodohkan dan pilihan ganda materi daur hidup hewan.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
+                                    <span><strong>Asesmen Sikap & Proses:</strong> Rubrik penilaian kerja sama kelompok, kemampuan bernalar kritis, dan kejujuran selama permainan berlangsung.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="p-5 rounded-xl bg-emerald-50/60 border border-emerald-100 space-y-3">
+                            <h3 class="font-bold text-emerald-900 text-base">Hasil & Dampak Penerapan Inovasi:</h3>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                                    <span>Terjadi peningkatan signifikan pada antusiasme dan partisipasi aktif seluruh murid di kelas.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                                    <span>Suasana pembelajaran menjadi sangat menyenangkan (Joyful Learning) dan kolaboratif.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                                    <span>Pemahaman konsep metamorfosis murid meningkat dibuktikan dengan pencapaian hasil tes LKPD yang optimal.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div class="p-5 rounded-xl bg-slate-50 border border-slate-100 space-y-3">
-                        <h3 class="font-bold text-slate-900 text-base">Instrumen Evaluasi Pembelajaran:</h3>
-                        <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
-                            <li class="flex items-start gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Asesmen Kognitif Individu:</strong> Lembar Kerja Peserta Didik (LKPD Mandiri) berisi soal menjodohkan dan pilihan ganda materi daur hidup hewan.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                                <span><strong>Asesmen Sikap & Proses:</strong> Rubrik penilaian kerja sama kelompok, kemampuan bernalar kritis, dan kejujuran selama permainan berlangsung.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="p-5 rounded-xl bg-emerald-50/60 border border-emerald-100 space-y-3">
-                        <h3 class="font-bold text-emerald-900 text-base">Hasil & Dampak Penerapan Inovasi:</h3>
-                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5">
-                            <li class="flex items-start gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Terjadi peningkatan signifikan pada antusiasme dan partisipasi aktif seluruh murid di kelas.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Suasana pembelajaran menjadi sangat menyenangkan (Joyful Learning) dan kolaboratif.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
-                                <span>Pemahaman konsep metamorfosis murid meningkat dibuktikan dengan pencapaian hasil tes LKPD yang optimal.</span>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="pt-4 border-t border-slate-100 mt-4 text-xs text-slate-500 font-medium text-center">
+                    Evaluasi komprehensif mencakup ranah kognitif, afektif, dan psikomotorik peserta didik.
                 </div>
             </div>
         </div>
 
         <!-- ==================== SLIDE 8: TERIMA KASIH ==================== -->
         <div id="slide-8" class="slide-view">
-            <div class="clean-card rounded-2xl p-10 sm:p-16 text-center relative overflow-hidden flex flex-col items-center justify-center min-h-[380px]">
-                <span class="absolute top-4 right-5 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
-                    08 / 08
-                </span>
+            <div class="clean-card rounded-2xl p-8 sm:p-12 text-center relative">
+                <div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-xs font-black text-blue-600 tracking-widest uppercase">Penutup Presentasi</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
+                            08 / 08
+                        </span>
+                    </div>
 
-                <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold mb-4 border border-blue-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-7 h-7">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                    </svg>
+                    <div class="max-w-2xl mx-auto space-y-4">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold mx-auto border border-blue-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        </div>
+
+                        <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+                            Terima Kasih
+                        </h2>
+
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                            Mari Terus Berinovasi dan Mewujudkan Pembelajaran yang Berkesadaran, Bermakna, dan Menggembirakan bagi Seluruh Anak Indonesia.
+                        </p>
+
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm text-slate-600 max-w-md mx-auto space-y-1">
+                            <p class="font-bold text-slate-800">Komitmen Pendidikan Masa Depan:</p>
+                            <p>“Inovasi media pembelajaran adalah kunci membuka potensi dan antusiasme belajar setiap murid di ruang kelas.”</p>
+                        </div>
+                    </div>
                 </div>
-
-                <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-3 tracking-tight">
-                    Terima Kasih
-                </h2>
-
-                <p class="text-slate-600 text-sm sm:text-base max-w-lg mx-auto leading-relaxed mb-6">
-                    Mari Terus Berinovasi dan Mewujudkan Pembelajaran yang Berkesadaran, Bermakna, dan Menggembirakan bagi Seluruh Anak Indonesia.
-                </p>
 
                 <div class="pt-5 border-t border-slate-100 w-full max-w-xs mx-auto text-xs sm:text-sm text-slate-500 font-medium">
                     <p class="font-bold text-slate-800 text-base">Muhammad Izzul Fahmi, S.Pd.</p>
