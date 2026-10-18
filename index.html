@@ -23,12 +23,12 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Animated Slide Transition System */
+        /* sistem animasi perpindahan slide */
         .slide-view {
             display: none;
             opacity: 0;
-            transform: translateY(18px) scale(0.985);
-            transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px) scale(0.97);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
 
@@ -258,7 +258,7 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 5: RISET & PROTOTIPE MEDIA (TERMASUK GALERI SCREENSHOT) ==================== -->
+        <!-- ==================== SLIDE 5: RISET & PROTOTIPE MEDIA ==================== -->
         <div id="slide-5" class="slide-view">
             <div class="clean-card rounded-3xl p-8 sm:p-12 relative">
                 <span class="absolute top-6 right-8 text-xs sm:text-sm font-bold text-slate-400/60 tracking-widest select-none">
@@ -272,7 +272,7 @@
                     </h2>
                 </div>
 
-                <!-- GALERI SCREENSHOT ANTAK MUKA PERMAINAN ULAR TANGGA DIGITAL -->
+                <!-- GALERI SCREENSHOT -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                     <div class="group relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-sm hover:shadow-md transition-all">
                         <img src="tampilaninovasi/halamanawal.png" alt="Halaman Awal Permainan" class="w-full h-32 sm:h-36 object-cover group-hover:scale-105 transition-transform duration-300">
@@ -445,41 +445,51 @@
 
     </main>
 
-    <!-- SCRIPT NAVIGASI SLIDE, FULLSCREEN, DAN UNDUH PDF -->
+    <!-- SCRIPT NAVIGASI SLIDE, FULLSCREEN, DENGAN ANIMASI PERPINDAHAN -->
     <script>
         let currentSlide = 1;
         const totalSlides = 8;
+        let isAnimating = false;
 
-        function updateSlideUI() {
-            for (let i = 1; i <= totalSlides; i++) {
-                const slide = document.getElementById('slide-' + i);
-                if (slide) slide.classList.remove('active');
+        function updateSlideUI(nextSlideNum) {
+            if (isAnimating || nextSlideNum === currentSlide) return;
+            isAnimating = true;
+
+            const currentElement = document.getElementById('slide-' + currentSlide);
+            const nextElement = document.getElementById('slide-' + nextSlideNum);
+
+            if (currentElement && nextElement) {
+                // Sembunyikan slide aktif dengan efek memudar
+                currentElement.style.opacity = '0';
+                currentElement.style.transform = 'translateY(-15px) scale(0.97)';
+
+                setTimeout(() => {
+                    currentElement.classList.remove('active');
+                    currentElement.style.transform = '';
+
+                    // Tampilkan slide berikutnya dengan efek naik dan membesar halus
+                    nextElement.classList.add('active');
+                    
+                    // Trigger reflow untuk memastikan animasi CSS berjalan
+                    void nextElement.offsetWidth;
+
+                    currentSlide = nextSlideNum;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    isAnimating = false;
+                }, 300);
+            } else {
+                isAnimating = false;
             }
-
-            const activeSlide = document.getElementById('slide-' + currentSlide);
-            if (activeSlide) {
-                activeSlide.classList.add('active');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-            } else {
-                currentSlide = 1;
-            }
-            updateSlideUI();
+            let nextNum = currentSlide < totalSlides ? currentSlide + 1 : 1;
+            updateSlideUI(nextNum);
         }
 
         function prevSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-            } else {
-                currentSlide = totalSlides;
-            }
-            updateSlideUI();
+            let prevNum = currentSlide > 1 ? currentSlide - 1 : totalSlides;
+            updateSlideUI(prevNum);
         }
 
         // TOGGLE FULLSCREEN
@@ -510,7 +520,6 @@
 
             html2pdf().set(opt).from(element).save().then(() => {
                 document.body.classList.remove('pdf-export-mode');
-                updateSlideUI();
             });
         }
 
