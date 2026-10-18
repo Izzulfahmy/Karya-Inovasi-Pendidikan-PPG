@@ -44,71 +44,83 @@
         }
     </style>
 
-    <!-- CONTAINER UTAMA TANPA CARD (DESAIN SLIDE PPT FULLSCREEN / CLEAN) -->
-    <div class="relative w-full min-h-[580px] rounded-2xl bg-gradient-to-br from-slate-50 via-white to-blue-50/30 border border-slate-200/80 shadow-xl overflow-hidden flex flex-col justify-between p-8 sm:p-14 selection:bg-blue-600 selection:text-white">
+    <!-- SCRIPT KHUSUS UNTUK MENYEMBUNYIKAN TOMBOL PANAH NAVIGASI DI BERANDA -->
+    <script>
+        (function() {
+            const prevBtn = document.querySelector('button[onclick="prevSlide()"]');
+            const nextBtn = document.querySelector('button[onclick="nextSlide()"]');
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
+        })();
+    </script>
+
+    <!-- CONTAINER UTAMA BORDERLESS TANPA CARD -->
+    <div class="relative w-full min-h-[580px] overflow-hidden flex flex-col justify-between p-6 sm:p-10 selection:bg-blue-600 selection:text-white">
         
         <!-- BACKGROUND ORNAMEN -->
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
         <div class="absolute inset-0 bg-dots z-0 pointer-events-none"></div>
 
-        <!-- ORNAMEN DESAIN PPT (Garis Sudut Estetik) -->
+        <!-- ORNAMEN DESAIN PPT (Garis Sudut Estetik Tanpa Border Card) -->
         <div class="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-blue-500/30 rounded-tl-2xl pointer-events-none"></div>
         <div class="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-indigo-500/30 rounded-br-2xl pointer-events-none"></div>
 
-        <!-- HEADER SLIDE: BADGE & NOMOR SLIDE -->
-        <div class="relative z-10 flex justify-between items-center w-full">
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/80 border border-blue-100 shadow-sm backdrop-blur-md">
-                <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                <span class="text-xs font-extrabold text-blue-900 tracking-wider uppercase">Laporan Akhir Portofolio Digital</span>
-            </div>
-            <span class="text-xs sm:text-sm font-bold text-slate-400/80 tracking-widest select-none">
-                01 / 01
-            </span>
-        </div>
-
         <!-- KONTEN UTAMA: TULISAN LATIN & JUDUL BESAR ESTETIK -->
-        <div class="relative z-10 my-auto py-6 text-center max-w-4xl mx-auto space-y-3">
+        <div class="relative z-10 my-auto py-4 text-center max-w-4xl mx-auto space-y-3">
             
-            <!-- TULISAN LATIN / SCRIPT ESTETIK (SUBTITLE ATAS) -->
-            <p class="font-script text-4xl sm:text-6xl text-blue-600 font-normal leading-none drop-shadow-sm transform -rotate-1">
+            <!-- TULISAN LATIN / SCRIPT ESTETIK -->
+            <p class="font-script text-5xl sm:text-7xl text-blue-600 font-normal leading-none drop-shadow-sm transform -rotate-1">
                 Seminar
             </p>
 
-            <!-- JUDUL UTAMA BESAR & ELEGAN (PPT STYLE) -->
+            <!-- JUDUL UTAMA BESAR & ELEGAN -->
             <h1 class="font-serif-title text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
                 Pendidikan Profesi Guru
             </h1>
 
             <!-- ORNAMEN GARIS AKSEN GRADEN DENGAN TITIK DITENGAH -->
-            <div class="flex items-center justify-center gap-3 py-2">
-                <div class="h-[2px] w-16 sm:w-28 bg-gradient-to-r from-transparent via-blue-500 to-indigo-500 rounded-full"></div>
+            <div class="flex items-center justify-center gap-3 py-1">
+                <div class="h-[2px] w-20 sm:w-32 bg-gradient-to-r from-transparent via-blue-500 to-indigo-500 rounded-full"></div>
                 <div class="w-2 h-2 rounded-full bg-indigo-600 shadow-sm"></div>
-                <div class="h-[2px] w-16 sm:w-28 bg-gradient-to-l from-transparent via-blue-500 to-indigo-500 rounded-full"></div>
+                <div class="h-[2px] w-20 sm:w-32 bg-gradient-to-l from-transparent via-blue-500 to-indigo-500 rounded-full"></div>
             </div>
 
-            <!-- DESKRIPSI RINGKAS & ANGGUN -->
+            <!-- DESKRIPSI RINGKAS -->
             <p class="text-slate-600 text-sm sm:text-lg max-w-2xl mx-auto font-medium leading-relaxed pt-1">
-                Refleksi Filosofis, Pengalaman Belajar Bermakna, dan Pameran Karya Inovasi Pembelajaran Guru Profesional
+                Refleksi Filosofis, Pengalaman Belajar Bermakna, dan Karya Inovasi Pembelajaran Guru Profesional
             </p>
         </div>
 
-        <!-- FOOTER SLIDE: IDENTITAS PENULIS & INSTANSI -->
-        <div class="relative z-10 w-full pt-6 border-t border-slate-200/60 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <!-- FOOTER SLIDE: INFORMASI PEMASAN, MAHASISWA & TIM PENGUJI SEMINAR -->
+        <div class="relative z-10 w-full pt-4 border-t border-slate-200/60 grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
             
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-base shadow-md shadow-blue-500/20">
+            <!-- MAHASISWA / PRESENTATOR (KIRI) -->
+            <div class="md:col-span-5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-base shadow-md shadow-blue-500/20 flex-shrink-0">
                     F
                 </div>
                 <div>
+                    <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Penyaji / Mahasiswa</span>
                     <h2 class="font-bold text-slate-900 text-sm sm:text-base leading-tight">Muhammad Izzul Fahmi, S.Pd.</h2>
-                    <p class="text-xs text-slate-500 font-medium">NIM. 250211920117</p>
+                    <p class="text-xs text-slate-500 font-medium">NIM. 250211920117 — PPG Calon Guru PGSD</p>
                 </div>
             </div>
 
-            <div class="text-center sm:text-right space-y-0.5">
-                <p class="text-xs font-bold text-slate-800 uppercase tracking-wider">Program Studi PPG Calon Guru - PGSD</p>
-                <p class="text-xs text-slate-500 font-medium">FKIP Universitas Negeri Jember</p>
+            <!-- TIM DOSEN & GURU PAMONG SEMINAR (KANAN) -->
+            <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-2 text-left sm:text-right border-t md:border-t-0 md:border-l border-slate-200/60 pt-3 md:pt-0 md:pl-4">
+                <div>
+                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Dosen Pembimbing</span>
+                    <p class="text-xs font-bold text-slate-800 leading-tight">Nindya Nurdianasari, S.Pd., M.Pd.</p>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Dosen Penguji</span>
+                    <p class="text-xs font-bold text-slate-800 leading-tight">Dr. Hety Mustika Ani, M.Pd.</p>
+                </div>
+                <div>
+                    <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Guru Pamong Penguji</span>
+                    <p class="text-xs font-bold text-slate-800 leading-tight">Martina Setya Rahayu, S.Pd.</p>
+                </div>
             </div>
 
         </div>
