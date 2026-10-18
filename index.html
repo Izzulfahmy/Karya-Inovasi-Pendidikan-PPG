@@ -65,12 +65,19 @@
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center justify-between relative px-2 sm:px-6 py-3 selection:bg-blue-600 selection:text-white">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center justify-between relative px-2 sm:px-6 py-2 selection:bg-blue-600 selection:text-white">
 
-    <!-- HEADER / CONTROL BAR (TAB CENTER & TOMBOL AKSI KANAN) -->
-    <header class="w-full max-w-6xl mx-auto flex items-center justify-between gap-2 z-50 mb-3">
-        <!-- SPA CER -->
-        <div class="w-12 sm:w-20"></div>
+    <!-- HEADER / CONTROL BAR -->
+    <header class="w-full max-w-6xl mx-auto flex items-center justify-between gap-2 z-50 mb-1.5">
+        
+        <!-- POJOK KIRI ATAS: LOGO BERURUTAN (SEUKURAN TOMBOL TAB) -->
+        <div class="flex items-center gap-1.5 p-1 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
+            <img src="logo.png" alt="Logo" class="h-7 w-auto object-contain" />
+            <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-7 w-auto object-contain" />
+            <img src="dikti.jpg" alt="Dikti" class="h-7 w-auto object-contain" />
+            <img src="fkip.jpg" alt="FKIP" class="h-7 w-auto object-contain" />
+            <img src="ppg.png" alt="PPG" class="h-7 w-auto object-contain" />
+        </div>
 
         <!-- TAB NAVIGASI SEAMLESS DIBUAT DITENGAH -->
         <nav class="flex items-center gap-1 p-1 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
@@ -118,7 +125,7 @@
 
     <!-- CONTAINER UTAMA UNTUK KONTEN TAB DARI FILE EXTERNAL -->
     <main id="presentation-container" class="w-full max-w-6xl mx-auto my-auto flex-grow flex items-center justify-center">
-        <!-- Konten akan dimuat secara dinamis via fetch/JavaScript -->
+        <!-- Konten dimuat secara dinamis via fetch/JavaScript -->
     </main>
 
     <!-- SCRIPT NAVIGASI, SWITCH TAB & EKSPOR PDF PPT 1920x1080 -->
