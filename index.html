@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio & Karya Inovasi - PPG Calon Guru</title>
+    <title>Portofolio & Karya Inovasi Pendidikan</title>
     <!-- Favicon / Logo Tab -->
     <link rel="icon" type="image/png" href="logo.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2pdf CDN untuk Cetak ke PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -21,93 +23,214 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Styling Tab Aktif & Non-Aktif */
-        .tab-button {
-            transition: all 0.25s ease-in-out;
-            position: relative;
+        /* Clean Card Design dengan Ukuran Tinggi Seragam */
+        .clean-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px -5px rgba(148, 163, 184, 0.1), 0 8px 10px -6px rgba(148, 163, 184, 0.1);
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .tab-button.active {
-            background-color: #ffffff;
-            color: #2563eb;
-            font-weight: 800;
-            box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.12), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            border-color: #e2e8f0;
+        /* Slide View Management */
+        .slide-view {
+            display: none;
+            width: 100%;
         }
 
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 12px;
-            right: 12px;
-            height: 3px;
-            background-color: #2563eb;
-            border-radius: 9999px;
+        .slide-view.active {
+            display: block;
+        }
+
+        /* Mode Cetak PDF Khusus 1920x1080 (16:9 PPT Ratio) */
+        .pdf-export-mode .slide-view {
+            display: block !important;
+            page-break-after: always;
+            margin-bottom: 0 !important;
+            height: 1080px !important;
+            width: 1920px !important;
+            min-height: 1080px !important;
+            box-sizing: border-box;
+        }
+
+        .pdf-export-mode .clean-card {
+            height: 1080px !important;
+            min-height: 1080px !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 3rem !important;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center justify-between relative px-2 sm:px-6 py-3 selection:bg-blue-600 selection:text-white">
 
-    <!-- HEADER & SEAMLESS TAB NAVIGATION -->
-    <header class="w-full max-w-6xl mx-auto pt-4 sm:pt-6 px-3 sm:px-6 z-40">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <div>
-                <span class="text-[11px] font-black tracking-widest text-blue-600 uppercase">Portofolio Digital PPG</span>
-                <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Muhammad Izzul Fahmi, S.Pd.</h1>
-            </div>
-            
-            <!-- SEAMLESS TAB BAR -->
-            <nav class="p-1 rounded-2xl bg-slate-200/70 backdrop-blur-md border border-slate-300/60 inline-flex items-center gap-1 self-start sm:self-auto shadow-inner">
-                <button onclick="switchTab('visi-pribadi.html', this)" class="tab-button px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 border border-transparent cursor-pointer">
-                    Visi Pribadi
-                </button>
-                <button onclick="switchTab('refleksi-pengalaman.html', this)" class="tab-button px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 border border-transparent cursor-pointer">
-                    Refleksi Pengalaman Belajar
-                </button>
-                <button onclick="switchTab('karya-inovasi.html', this)" class="tab-button active px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 border border-transparent cursor-pointer">
-                    Karya Inovasi Pendidikan
-                </button>
-            </nav>
+    <!-- HEADER / CONTROL BAR (TAB CENTER & TOMBOL AKSI KANAN) -->
+    <header class="w-full max-w-6xl mx-auto flex items-center justify-between gap-2 z-50 mb-3">
+        <!-- SPA CER -->
+        <div class="w-12 sm:w-20"></div>
+
+        <!-- TAB NAVIGASI SEAMLESS DIBUAT DITENGAH -->
+        <nav class="flex items-center gap-1 p-1 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
+            <button onclick="switchTab('visi-pribadi.html', this)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap">
+                Visi Pribadi
+            </button>
+            <button onclick="switchTab('refleksi-pengalaman.html', this)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap">
+                Refleksi Pengalaman Belajar
+            </button>
+            <button onclick="switchTab('karya-inovasi.html', this)" class="tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap">
+                Karya Inovasi Pendidikan
+            </button>
+        </nav>
+
+        <!-- POJOK KANAN: TOMBOL UNDUH PDF & FULLSCREEN -->
+        <div class="flex items-center gap-1.5">
+            <!-- Tombol Unduh PDF -->
+            <button onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (16:9 PPT PDF)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+            </button>
+
+            <!-- Tombol Fullscreen -->
+            <button onclick="toggleFullScreen()" aria-label="Layar Penuh" title="Layar Penuh" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
+                <svg id="fullscreen-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                </svg>
+            </button>
         </div>
     </header>
 
-    <!-- WADAH KONTEN TAB (IFRAME RESPONSIVE) -->
-    <main class="w-full max-w-6xl mx-auto px-2 sm:px-6 flex-grow flex items-center justify-center my-2">
-        <iframe 
-            id="tab-frame" 
-            src="karya-inovasi.html" 
-            class="w-full h-[620px] sm:h-[650px] border-0 rounded-2xl bg-transparent transition-opacity duration-300"
-            title="Konten Presentasi">
-        </iframe>
+    <!-- NAVIGASI PANAH TIPIS MENGAPUNG (KIRI & KANAN) -->
+    <button onclick="prevSlide()" aria-label="Sebelumnya" class="fixed left-1 sm:left-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+    </button>
+
+    <button onclick="nextSlide()" aria-label="Berikutnya" class="fixed right-1 sm:right-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+
+    <!-- CONTAINER UTAMA UNTUK KONTEN TAB DARI FILE EXTERNAL -->
+    <main id="presentation-container" class="w-full max-w-6xl mx-auto my-auto flex-grow flex items-center justify-center">
+        <!-- Konten akan dimuat secara dinamis via fetch/JavaScript -->
     </main>
 
-    <!-- FOOTER SEDERHANA -->
-    <footer class="w-full text-center py-3 text-xs font-medium text-slate-400">
-        &copy; 2026 Muhammad Izzul Fahmi, S.Pd. &bull; PPG Calon Guru PGSD Universitas Negeri Jember
-    </footer>
-
-    <!-- SCRIPT LOGIKA PERPINDAHAN TAB SEAMLESS -->
+    <!-- SCRIPT NAVIGASI, SWITCH TAB & EKSPOR PDF PPT 1920x1080 -->
     <script>
-        function switchTab(pageUrl, buttonElement) {
-            const frame = document.getElementById('tab-frame');
-            
-            // Transisi halus saat ganti konten
-            frame.style.opacity = '0';
+        let currentSlide = 1;
+        let totalSlides = 0;
 
-            setTimeout(() => {
-                frame.src = pageUrl;
-                frame.onload = () => {
-                    frame.style.opacity = '1';
-                };
-            }, 150);
-
-            // Update status kelas tombol tab
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            buttonElement.classList.add('active');
+        // LOAD FILE KONTEN KE DALAM CONTAINER MAIN
+        async function loadTabContent(filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Gagal memuat file konten.');
+                const html = await response.text();
+                document.getElementById('presentation-container').innerHTML = html;
+                
+                // Hitung Ulang Total Slide
+                const slides = document.querySelectorAll('.slide-view');
+                totalSlides = slides.length;
+                currentSlide = 1;
+                updateSlideUI();
+            } catch (error) {
+                document.getElementById('presentation-container').innerHTML = `
+                    <div class="clean-card rounded-2xl p-8 text-center flex items-center justify-center w-full">
+                        <p class="text-slate-500 font-bold">Konten ${filePath} belum dapat dimuat atau file tidak ditemukan.</p>
+                    </div>
+                `;
+            }
         }
+
+        // PERALIHAN TAB
+        function switchTab(filePath, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap';
+            });
+            btnElement.className = 'tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap';
+            loadTabContent(filePath);
+        }
+
+        // UPDATE TAMPILAN SLIDE
+        function updateSlideUI() {
+            const slides = document.querySelectorAll('.slide-view');
+            slides.forEach((slide, index) => {
+                if (index + 1 === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            window.scrollTo({ top: 0 });
+        }
+
+        function nextSlide() {
+            if (totalSlides === 0) return;
+            currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+            updateSlideUI();
+        }
+
+        function prevSlide() {
+            if (totalSlides === 0) return;
+            currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides;
+            updateSlideUI();
+        }
+
+        // TOGGLE FULLSCREEN
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    alert(`Gagal mengaktifkan layar penuh: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // UNDUH SELURUH SLIDE KE FORMAT PDF RASIO 16:9 (1920 x 1080 Pixel PPT)
+        function downloadPDF() {
+            const element = document.getElementById('presentation-container');
+            document.body.classList.add('pdf-export-mode');
+
+            const opt = {
+                margin:       0,
+                filename:     'Presentasi_Portofolio_16x9.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 1, 
+                    useCORS: true,
+                    width: 1920,
+                    height: 1080 * totalSlides
+                },
+                jsPDF:        { unit: 'px', format: [1920, 1080], orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.classList.remove('pdf-export-mode');
+            });
+        }
+
+        // NAVIGASI KEYBOARD (PANAH KIRI & KANAN)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") {
+                nextSlide();
+            } else if (event.key === "ArrowLeft") {
+                prevSlide();
+            }
+        });
+
+        // MUAT KONTEN DEFAULT SAAT PERTAMA KALI DIBUKA
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTabContent('karya-inovasi.html');
+        });
     </script>
 </body>
 </html>
