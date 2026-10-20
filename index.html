@@ -78,7 +78,7 @@
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 box-sizing: border-box !important;
-                padding: 12mm 15mm !important;
+                padding: 10mm 12mm !important;
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
@@ -94,11 +94,27 @@
 
             .pdf-page-slide .clean-card {
                 width: 100% !important;
-                height: calc(100vh - 35mm) !important;
+                height: calc(100vh - 32mm) !important;
                 min-height: auto !important;
                 box-shadow: none !important;
                 border: 1px solid #cbd5e1 !important;
                 background: #ffffff !important;
+            }
+
+            /* MEMASTIKAN GAMBAR, QR CODE, DAN IFRAME GDRIVE TAMPIL SEMPURNA */
+            img {
+                max-width: 100% !important;
+                display: block !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            iframe {
+                display: block !important;
+                visibility: visible !important;
+                border: 1px solid #cbd5e1 !important;
+                width: 100% !important;
+                min-height: 220px !important;
             }
         }
     </style>
@@ -301,12 +317,13 @@
             }
         }
 
-        // UNDUH SELURUH KONTEN TAB & SLIDE KE DALAM PDF PRESISI 100%
+        // UNDUH SELURUH KONTEN TAB & SLIDE KE DALAM PDF PRESISI UTUH
         async function downloadPDF() {
             const btnDownload = document.getElementById('btn-download-pdf');
             const originalBtnHtml = btnDownload.innerHTML;
             
             try {
+                // Tampilkan Indikator Loading
                 btnDownload.disabled = true;
                 btnDownload.innerHTML = `
                     <svg class="animate-spin h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -328,11 +345,10 @@
 
                         const slides = tempDiv.querySelectorAll('.slide-view');
                         slides.forEach(slide => {
-                            // Buat Lembar Halaman Cetak Khusus
                             const pageWrapper = document.createElement('div');
                             pageWrapper.className = 'pdf-page-slide';
 
-                            // Render Header Lengkap (Logo & Tab Aktif) untuk Setiap Halaman PDF
+                            // Header Cetak (Logo + Indikator Tab Aktif)
                             const headerDiv = document.createElement('div');
                             headerDiv.className = 'w-full flex items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-200';
                             headerDiv.innerHTML = `
@@ -363,12 +379,12 @@
                     }
                 }
 
-                // Jalankan Sistem Cetak Browser
+                // Berikan jeda waktu 1.5 detik agar iframe Google Drive & QR Code selesai memuat sempurna
                 setTimeout(() => {
                     window.print();
                     btnDownload.disabled = false;
                     btnDownload.innerHTML = originalBtnHtml;
-                }, 300);
+                }, 1500);
 
             } catch (err) {
                 alert('Gagal membuat dokumen PDF: ' + err.message);
