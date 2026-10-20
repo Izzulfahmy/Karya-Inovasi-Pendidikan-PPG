@@ -8,8 +8,6 @@
     <link rel="icon" type="image/png" href="logo.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf CDN untuk Cetak ke PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -44,57 +42,63 @@
             display: block;
         }
 
-        /* STYLING PRESISE KHUSUS EKSPOR PDF ALL SLIDES (16:9 PROPORSIONAL & CENTERED) */
-        #pdf-export-container {
-            position: absolute;
-            top: -99999px;
-            left: -99999px;
-            width: 1122px;
+        /* CONTAINER PRINT HIDDEN */
+        #print-container {
+            display: none;
         }
 
-        .pdf-render-wrapper {
-            width: 1122px !important;
-            background-color: #ffffff;
-            margin: 0 auto !important;
-            padding: 0 !important;
-        }
+        /* STYLING KHUSUS UNTUK METODE CETAK BROWSER (WINDOW.PRINT) */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
 
-        .pdf-render-wrapper .slide-view {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            page-break-after: always !important;
-            page-break-inside: avoid !important;
-            width: 1122px !important;
-            height: 631px !important; /* Rasio 16:9 Presisi A4 Landscape (1122 x 631 px) */
-            box-sizing: border-box !important;
-            margin: 0 !important;
-            padding: 16px !important;
-            overflow: hidden !important;
-            background-color: #f8fafc !important;
-        }
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
 
-        .pdf-render-wrapper .clean-card {
-            width: 100% !important;
-            height: 100% !important;
-            min-height: 100% !important;
-            max-height: 100% !important;
-            border-radius: 16px !important;
-            box-shadow: none !important;
-            border: 1px solid #e2e8f0 !important;
-            padding: 1.75rem !important;
-            box-sizing: border-box !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-            background: #ffffff !important;
-        }
+            /* Sembunyikan elemen UI seperti Header, Navigasi Panah, dan Main Container bawaan */
+            header, button, #presentation-container {
+                display: none !important;
+            }
 
-        /* Sembunyikan elemen dekoratif background heavy/animasi saat render PDF */
-        .pdf-render-wrapper .bg-blob-1,
-        .pdf-render-wrapper .bg-blob-2 {
-            display: none !important;
+            /* Tampilkan Container Cetak Khusus */
+            #print-container {
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .print-page {
+                width: 100vw !important;
+                height: 100vh !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                box-sizing: border-box !important;
+                padding: 1.5rem !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                background-color: #f8fafc !important;
+            }
+
+            .print-page .slide-view {
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            .print-page .clean-card {
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 100% !important;
+                max-height: 100% !important;
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+            }
         }
     </style>
 </head>
@@ -134,7 +138,7 @@
         <!-- POJOK KANAN: TOMBOL UNDUH PDF & FULLSCREEN -->
         <div class="flex items-center gap-1.5">
             <!-- Tombol Unduh PDF -->
-            <button id="btn-download-pdf" onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (16:9 PPT PDF)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
+            <button id="btn-download-pdf" onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (PDF Presisi Tampilan Web)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
@@ -167,10 +171,10 @@
         <!-- Konten dimuat secara dinamis via fetch/JavaScript -->
     </main>
 
-    <!-- CONTAINER HIDDEN UNTUK PROSES RENDER EKSPOR PDF ALL SLIDES -->
-    <div id="pdf-export-container"></div>
+    <!-- CONTAINER KHUSUS PROSES CETAK WINDOW.PRINT() -->
+    <div id="print-container"></div>
 
-    <!-- SCRIPT NAVIGASI, SWITCH TAB & PERBAIKAN EKSPOR PDF PPT 16:9 -->
+    <!-- SCRIPT NAVIGASI, SWITCH TAB & CETAK PDF PRESISI -->
     <script>
         let currentSlide = 1;
         let totalSlides = 0;
@@ -256,7 +260,7 @@
             window.scrollTo({ top: 0 });
         }
 
-        // LOGIKA TOMBOL PANAH BERIKUTNYA (SWITCH TAB OTOMATIS SAAT SLIDE HABIS)
+        // LOGIKA TOMBOL PANAH BERIKUTNYA
         function nextSlide() {
             if (totalSlides === 0) return;
 
@@ -271,7 +275,7 @@
             }
         }
 
-        // LOGIKA TOMBOL PANAH SEBELUMNYA (KEMBALI TAB OTOMATIS)
+        // LOGIKA TOMBOL PANAH SEBELUMNYA
         function prevSlide() {
             if (totalSlides === 0) return;
 
@@ -299,13 +303,12 @@
             }
         }
 
-        // UNDUH SELURUH SLIDE DARI SEMUA TAB KE FORMAT PDF RASIO 16:9 RAPI, CENTERED & BERURUTAN
+        // METODE UNDUH PDF PRESISI MENGGUNAKAN WINDOW.PRINT() BROWSER
         async function downloadPDF() {
             const btnDownload = document.getElementById('btn-download-pdf');
             const originalBtnHtml = btnDownload.innerHTML;
             
             try {
-                // Tampilkan Status Loading di Tombol
                 btnDownload.disabled = true;
                 btnDownload.innerHTML = `
                     <svg class="animate-spin h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -314,13 +317,10 @@
                     </svg>
                 `;
 
-                // 1. Ambil Konten Seluruh Tab HTML
-                const pdfContainer = document.getElementById('pdf-export-container');
-                pdfContainer.innerHTML = '';
-                
-                const wrapper = document.createElement('div');
-                wrapper.className = 'pdf-render-wrapper';
+                const printContainer = document.getElementById('print-container');
+                printContainer.innerHTML = '';
 
+                // Ambil semua slide dari seluruh tab HTML
                 for (const filePath of tabsList) {
                     const response = await fetch(filePath);
                     if (response.ok) {
@@ -328,62 +328,29 @@
                         const tempDiv = document.createElement('div');
                         tempDiv.innerHTML = htmlText;
 
-                        // Ambil semua elemen slide-view
                         const slides = tempDiv.querySelectorAll('.slide-view');
                         slides.forEach(slide => {
+                            const pageWrapper = document.createElement('div');
+                            pageWrapper.className = 'print-page';
+                            
                             const slideClone = slide.cloneNode(true);
-                            slideClone.classList.add('active'); // Pastikan aktif agar terlihat
-
-                            // Ganti Iframe Google Drive dengan Card Placeholder agar Render PDF Rapi
-                            const iframes = slideClone.querySelectorAll('iframe');
-                            iframes.forEach(iframe => {
-                                const placeholder = document.createElement('div');
-                                placeholder.className = 'w-full h-full bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center justify-center p-6 text-center space-y-2';
-                                placeholder.innerHTML = `
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-blue-600 mx-auto">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                    </svg>
-                                    <p class="text-xs font-bold text-slate-700">Lampiran Dokumen PDF / Media Interaktif</p>
-                                    <p class="text-[10px] text-slate-500">Dapat diakses secara langsung melalui tautan atau QR Code pada dokumen ini.</p>
-                                `;
-                                iframe.parentNode.replaceChild(placeholder, iframe);
-                            });
-
-                            wrapper.appendChild(slideClone);
+                            slideClone.classList.add('active');
+                            
+                            pageWrapper.appendChild(slideClone);
+                            printContainer.appendChild(pageWrapper);
                         });
                     }
                 }
 
-                pdfContainer.appendChild(wrapper);
-
-                // 2. Konfigurasi html2pdf (Sesuai Ukuran Piksel Canvas 1122px x 631px)
-                const opt = {
-                    margin:       0,
-                    filename:     'Portofolio_dan_Karya_Inovasi_Pendidikan.pdf',
-                    image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { 
-                        scale: 2, 
-                        useCORS: true,
-                        logging: false,
-                        windowWidth: 1122
-                    },
-                    jsPDF:        { 
-                        unit: 'mm', 
-                        format: 'a4', 
-                        orientation: 'landscape' 
-                    }
-                };
-
-                // 3. Proses Cetak PDF
-                await html2pdf().set(opt).from(wrapper).save();
-
-                // Bersihkan Container Temporary
-                pdfContainer.innerHTML = '';
+                // Panggil Dialog Cetak / Simpan ke PDF Bawaan Browser (Chrome)
+                setTimeout(() => {
+                    window.print();
+                    btnDownload.disabled = false;
+                    btnDownload.innerHTML = originalBtnHtml;
+                }, 500);
 
             } catch (err) {
-                alert('Gagal mengunduh PDF: ' + err.message);
-            } finally {
-                // Kembalikan Tombol ke Semula
+                alert('Gagal menyiapkan dokumen cetak PDF: ' + err.message);
                 btnDownload.disabled = false;
                 btnDownload.innerHTML = originalBtnHtml;
             }
