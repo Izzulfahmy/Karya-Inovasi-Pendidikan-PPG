@@ -351,44 +351,74 @@
                 Aturan Permainan Ular Tangga Digital
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Poin Aturan 1 -->
-                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Poin Aturan 1: Dadu & Pergerakan -->
+                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-sm flex-shrink-0">
                             01
                         </div>
-                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Giliran & Dadu Digital</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Setiap kelompok bergiliran mengocok dadu digital. Pion akan melangkah otomatis di papan permainan sesuai angka dadu yang didapatkan.
-                        </p>
+                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Giliran & Kocok Dadu</h3>
                     </div>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed pt-1">
+                        Setiap kelompok bergiliran mengocok dadu digital. Pion kelompok akan melangkah secara otomatis di papan permainan sesuai dengan angka dadu yang diperoleh.
+                    </p>
                 </div>
 
-                <!-- Poin Aturan 2 -->
-                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+                <!-- Poin Aturan 2: Tantangan Petak Kuis -->
+                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm flex-shrink-0">
                             02
                         </div>
-                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Tantangan Petak Kuis</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Jika pion mendarat di petak kuis, kelompok wajib berdiskusi dan memilih jawaban soal materi daur hidup hewan dalam batas waktu yang ditentukan.
-                        </p>
+                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Ketentuan Petak Kuis</h3>
                     </div>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed pt-1">
+                        Jika mendarat di petak soal, kelompok wajib berdiskusi untuk menjawab:
+                    </p>
+                    <ul class="text-xs sm:text-sm text-slate-700 space-y-1.5 pl-2 pt-1 font-medium">
+                        <li class="flex items-center gap-2 text-emerald-700">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                            <span><strong>Benar:</strong> Mendapat poin & tetap di petak tersebut.</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-rose-700">
+                            <span class="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0"></span>
+                            <span><strong>Salah:</strong> Mundur kembali ke petak sebelumnya.</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Poin Aturan 3 -->
-                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-sm">
+                <!-- Poin Aturan 3: Fitur Tangga & Ular -->
+                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-sm flex-shrink-0">
                             03
                         </div>
-                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Skor & Kemenangan</h3>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Jawaban benar memberikan poin tambahan kelompok. Kelompok yang berhasil mencapai garis <em>finish</em> pertama atau mengumpulkan skor tertinggi berhak atas penghargaan tim.
-                        </p>
+                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Petak Tangga & Ular</h3>
                     </div>
+                    <ul class="text-xs sm:text-sm text-slate-700 space-y-2 pt-1">
+                        <li class="flex items-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+                            <span><strong>Petak Tangga:</strong> Jika mendarat di kaki tangga, pion otomatis naik ke petak yang lebih tinggi.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+                            <span><strong>Petak Ular:</strong> Jika mendarat di kepala ular, pion otomatis turun meluncur ke petak bawah.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Poin Aturan 4: Kemenangan & Penilaian -->
+                <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-sm flex-shrink-0">
+                            04
+                        </div>
+                        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Penentuan Kemenangan</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed pt-1">
+                        Kelompok yang berhasil mencapai garis <em>finish</em> pertama kali atau mengumpulkan akumulasi skor kuis tertinggi akan dinyatakan sebagai pemenang dan berhak menerima penghargaan tim.
+                    </p>
                 </div>
             </div>
         </div>
