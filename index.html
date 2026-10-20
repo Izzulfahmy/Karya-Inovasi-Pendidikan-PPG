@@ -47,14 +47,15 @@
             display: none;
         }
 
-        /* ==================== STYLING KHUSUS MODE CETAK PDF (PRINT) ==================== */
+        /* ==================== STYLING KHUSUS MODE CETAK PDF (RASIO FULL HD 16:9) ==================== */
         @media print {
             @page {
-                size: A4 landscape;
+                /* Mengunci ukuran cetak ke Rasio Layar Full HD Lanskap (297mm x 167mm) */
+                size: 297mm 167mm;
                 margin: 0;
             }
 
-            /* Sembunyikan semua elemen UI layar biasa */
+            /* Sembunyikan elemen UI layar biasa */
             body > *:not(#print-mount-point) {
                 display: none !important;
             }
@@ -73,12 +74,12 @@
             }
 
             .pdf-page-slide {
-                width: 100vw !important;
-                height: 100vh !important;
+                width: 297mm !important;
+                height: 167mm !important;
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 box-sizing: border-box !important;
-                padding: 10mm 12mm !important;
+                padding: 6mm 10mm !important;
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important;
@@ -92,16 +93,21 @@
                 flex-grow: 1 !important;
             }
 
+            /* Mengatur skala konten agar presisi pas seukuran tampilan Desktop FHD */
             .pdf-page-slide .clean-card {
                 width: 100% !important;
-                height: calc(100vh - 32mm) !important;
-                min-height: auto !important;
+                height: 135mm !important;
+                min-height: 135mm !important;
+                max-height: 135mm !important;
                 box-shadow: none !important;
                 border: 1px solid #cbd5e1 !important;
                 background: #ffffff !important;
+                padding: 1.25rem !important;
+                box-sizing: border-box !important;
+                justify-content: space-between !important;
             }
 
-            /* MEMASTIKAN GAMBAR, QR CODE, DAN IFRAME GDRIVE TAMPIL SEMPURNA */
+            /* Memastikan iframe Google Drive & QR Code Tampil Sempurna Tanpa Memakan Tempat */
             img {
                 max-width: 100% !important;
                 display: block !important;
@@ -114,7 +120,8 @@
                 visibility: visible !important;
                 border: 1px solid #cbd5e1 !important;
                 width: 100% !important;
-                min-height: 220px !important;
+                height: 200px !important;
+                min-height: 200px !important;
             }
         }
     </style>
@@ -155,7 +162,7 @@
         <!-- POJOK KANAN: TOMBOL UNDUH PDF & FULLSCREEN -->
         <div class="flex items-center gap-1.5">
             <!-- Tombol Unduh PDF -->
-            <button id="btn-download-pdf" onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (PDF Presisi UTUH)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
+            <button id="btn-download-pdf" onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (PDF Presisi Desktop Full HD)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
@@ -350,20 +357,20 @@
 
                             // Header Cetak (Logo + Indikator Tab Aktif)
                             const headerDiv = document.createElement('div');
-                            headerDiv.className = 'w-full flex items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-200';
+                            headerDiv.className = 'w-full flex items-center justify-between gap-2 mb-1.5 pb-1.5 border-b border-slate-200';
                             headerDiv.innerHTML = `
                                 <div class="flex items-center gap-1.5 p-1 rounded-xl border border-slate-200 bg-white">
-                                    <img src="logo.png" class="h-6 w-auto object-contain" />
-                                    <img src="tutwuri.png" class="h-6 w-auto object-contain" />
-                                    <img src="dikti.jpg" class="h-6 w-auto object-contain" />
-                                    <img src="fkip.jpg" class="h-6 w-auto object-contain" />
-                                    <img src="ppg.png" class="h-6 w-auto object-contain" />
+                                    <img src="logo.png" class="h-5 w-auto object-contain" />
+                                    <img src="tutwuri.png" class="h-5 w-auto object-contain" />
+                                    <img src="dikti.jpg" class="h-5 w-auto object-contain" />
+                                    <img src="fkip.jpg" class="h-5 w-auto object-contain" />
+                                    <img src="ppg.png" class="h-5 w-auto object-contain" />
                                 </div>
                                 <div class="flex items-center gap-1 p-1 rounded-xl border border-slate-200 bg-white">
-                                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${tab.name === 'Beranda' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Beranda</span>
-                                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${tab.name === 'Visi Pribadi' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Visi Pribadi</span>
-                                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${tab.name === 'Refleksi Pengalaman Belajar' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Refleksi Pengalaman Belajar</span>
-                                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-bold ${tab.name === 'Karya Inovasi Pendidikan' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Karya Inovasi Pendidikan</span>
+                                    <span class="px-2 py-0.5 rounded-lg text-[9px] font-bold ${tab.name === 'Beranda' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Beranda</span>
+                                    <span class="px-2 py-0.5 rounded-lg text-[9px] font-bold ${tab.name === 'Visi Pribadi' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Visi Pribadi</span>
+                                    <span class="px-2 py-0.5 rounded-lg text-[9px] font-bold ${tab.name === 'Refleksi Pengalaman Belajar' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Refleksi Pengalaman Belajar</span>
+                                    <span class="px-2 py-0.5 rounded-lg text-[9px] font-bold ${tab.name === 'Karya Inovasi Pendidikan' ? 'bg-blue-600 text-white' : 'text-slate-400'}">Karya Inovasi Pendidikan</span>
                                 </div>
                             `;
 
