@@ -1,327 +1,564 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio & Karya Inovasi Pendidikan</title>
-    <!-- Favicon / Logo Tab -->
-    <link rel="icon" type="image/png" href="logo.png">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf CDN untuk Cetak ke PDF -->
+    <title>Portofolio Karya Inovasi Pendidikan - PPG</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- html2pdf.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #f8fafc;
-        }
-        
-        h1, h2, h3, h4, .font-heading {
-            font-family: 'Outfit', sans-serif;
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        /* Clean Card Design dengan Ukuran Tinggi Seragam */
-        .clean-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(148, 163, 184, 0.1), 0 8px 10px -6px rgba(148, 163, 184, 0.1);
-            min-height: 580px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Top Navigation / Header */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
+            align-items: center;
         }
 
-        /* Slide View Management */
-        .slide-view {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-container img {
+            height: 45px;
+            width: auto;
+            background: white;
+            padding: 2px;
+            border-radius: 6px;
+        }
+
+        .header-title h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .header-title p {
+            font-size: 0.8rem;
+            color: #93c5fd;
+        }
+
+        .download-btn {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .download-btn:hover {
+            background-color: #d97706;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Tabs */
+        nav {
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 67px;
+            z-index: 999;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Content Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Tab Content Panel Styling */
+        .tab-panel {
             display: none;
-            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.4s ease;
         }
 
-        .slide-view.active {
+        .tab-panel.active {
             display: block;
         }
 
-        /* PERBAIKAN STYLING KHUSUS MODE EXPORT PDF (16:9 PROPORSIONAL) */
-        .pdf-export-mode #presentation-container {
-            width: 1000px !important;
-            max-width: 1000px !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .pdf-export-mode .slide-view {
-            display: block !important;
+        /* PDF Layout Container Styles (Used during PDF Generation) */
+        .pdf-page-slide {
+            background: white !important;
+            padding: 2.5rem !important;
+            min-height: 1000px;
             page-break-after: always !important;
             page-break-inside: avoid !important;
-            width: 1000px !important;
-            height: 562.5px !important; /* Rasio 16:9 Presisi (1000 x 562.5) */
-            box-sizing: border-box !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden !important;
+            box-sizing: border-box;
+            border-bottom: 2px solid #cbd5e1;
+            margin-bottom: 2rem;
         }
 
-        .pdf-export-mode .clean-card {
-            width: 1000px !important;
-            height: 562.5px !important;
-            min-height: 562.5px !important;
-            max-height: 562.5px !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            border: none !important;
-            padding: 2rem 2.5rem !important;
-            box-sizing: border-box !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
+        .pdf-page-slide:last-child {
+            page-break-after: auto !important;
+            border-bottom: none;
+        }
+
+        /* Section Styling Inside Tabs */
+        .section-header {
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header i {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Profile Grid */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .profile-image-container {
+            text-align: center;
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 12px;
+            border: 4px solid white;
+            box-shadow: var(--box-shadow);
+            object-fit: cover;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table td {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-table td:first-child {
+            font-weight: 600;
+            width: 30%;
+            color: var(--text-light);
+        }
+
+        /* Content Gallery / Showcase Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-card-body {
+            padding: 1rem;
+        }
+
+        .gallery-card-body h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Reflection / Custom Content Styles */
+        .reflection-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1rem;
+        }
+
+        .reflection-box h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* PDF Header Banner for Generated PDF */
+        .pdf-header-banner {
+            display: none;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .is-pdf .pdf-header-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Loading Overlay */
+        #pdf-loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center justify-between relative px-2 sm:px-6 py-2 selection:bg-blue-600 selection:text-white">
+<body>
 
-    <!-- HEADER / CONTROL BAR -->
-    <header class="w-full max-w-6xl mx-auto flex items-center justify-between gap-2 z-50 mb-1.5">
-        
-        <!-- POJOK KIRI ATAS: LOGO BERURUTAN (SEUKURAN TOMBOL TAB) -->
-        <div class="flex items-center gap-1.5 p-1 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
-            <img src="logo.png" alt="Logo" class="h-7 w-auto object-contain" />
-            <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-7 w-auto object-contain" />
-            <img src="dikti.jpg" alt="Dikti" class="h-7 w-auto object-contain" />
-            <img src="fkip.jpg" alt="FKIP" class="h-7 w-auto object-contain" />
-            <img src="ppg.png" alt="PPG" class="h-7 w-auto object-contain" />
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="dikti.jpg" alt="Logo Dikti" onerror="this.style.display='none'">
+            <img src="fkip.jpg" alt="Logo FKIP" onerror="this.style.display='none'">
+            <img src="ppg.png" alt="Logo PPG" onerror="this.style.display='none'">
+            <div class="header-title">
+                <h1>Karya Inovasi Pendidikan PPG</h1>
+                <p>Portofolio Digital Pembelajaran Inovatif</p>
+            </div>
         </div>
-
-        <!-- TAB NAVIGASI SEAMLESS DIBUAT DITENGAH -->
-        <nav class="flex items-center gap-1 p-1 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-sm">
-            <!-- TAB BERANDA DENGAN IKON RUMAH -->
-            <button onclick="switchTab('beranda.html', this)" aria-label="Beranda" title="Beranda" class="tab-btn active p-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>
-            </button>
-            <button onclick="switchTab('visi-pribadi.html', this)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap">
-                Visi Pribadi
-            </button>
-            <button onclick="switchTab('refleksi-pengalaman.html', this)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap">
-                Refleksi Pengalaman Belajar
-            </button>
-            <button onclick="switchTab('karya-inovasi.html', this)" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap">
-                Karya Inovasi Pendidikan
-            </button>
-        </nav>
-
-        <!-- POJOK KANAN: TOMBOL UNDUH PDF & FULLSCREEN -->
-        <div class="flex items-center gap-1.5">
-            <!-- Tombol Unduh PDF -->
-            <button onclick="downloadPDF()" aria-label="Unduh PDF" title="Unduh Seluruh Slide (16:9 PPT PDF)" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
-            </button>
-
-            <!-- Tombol Fullscreen -->
-            <button onclick="toggleFullScreen()" aria-label="Layar Penuh" title="Layar Penuh" class="p-1.5 rounded-xl border border-slate-200/80 bg-white/90 backdrop-blur-md text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center">
-                <svg id="fullscreen-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
-                </svg>
-            </button>
-        </div>
+        <button id="downloadPdfBtn" class="download-btn">
+            <i class="fa-solid fa-file-pdf"></i> Unduh Portofolio (PDF)
+        </button>
     </header>
 
-    <!-- NAVIGASI PANAH TIPIS MENGAPUNG (KIRI & KANAN) -->
-    <button onclick="prevSlide()" aria-label="Sebelumnya" class="fixed left-1 sm:left-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-        </svg>
-    </button>
+    <!-- Menu Navigasi Tab -->
+    <nav>
+        <ul class="nav-tabs">
+            <li class="nav-tab active" onclick="switchTab('beranda')">
+                <i class="fa-solid fa-house"></i> Beranda
+            </li>
+            <li class="nav-tab" onclick="switchTab('karya-inovasi')">
+                <i class="fa-solid fa-lightbulb"></i> Karya Inovasi
+            </li>
+            <li class="nav-tab" onclick="switchTab('refleksi-pengalaman')">
+                <i class="fa-solid fa-book-open"></i> Refleksi Pengalaman
+            </li>
+        </ul>
+    </nav>
 
-    <button onclick="nextSlide()" aria-label="Berikutnya" class="fixed right-1 sm:right-3 top-1/2 -translate-y-1/2 z-50 w-8 h-10 sm:w-10 sm:h-12 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white hover:shadow-xl rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-md transition-all active:scale-90 cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-    </button>
+    <!-- Container Utama Konten Tab -->
+    <main class="main-container" id="content-to-export">
 
-    <!-- CONTAINER UTAMA UNTUK KONTEN TAB DARI FILE EXTERNAL -->
-    <main id="presentation-container" class="w-full max-w-6xl mx-auto my-auto flex-grow flex items-center justify-center">
-        <!-- Konten dimuat secara dinamis via fetch/JavaScript -->
+        <!-- TAB 1: BERANDA / BIODATA -->
+        <section id="beranda" class="tab-panel active">
+            <div class="pdf-header-banner">
+                <small>Portofolio PPG - Hal. 1: Beranda & Biodata</small>
+            </div>
+            <div class="section-header">
+                <i class="fa-solid fa-user-graduate"></i>
+                <h2>Profil & Biodata Mahasiswa</h2>
+            </div>
+            <div class="profile-grid">
+                <div class="profile-image-container">
+                    <img src="Pas Foto 4x6.jpg" alt="Pas Foto Mahasiswa" onerror="this.src='https://via.placeholder.com/200x300?text=Pas+Foto'">
+                </div>
+                <div>
+                    <table class="info-table">
+                        <tr>
+                            <td>Nama Lengkap</td>
+                            <td>Muhammad Izzul Fahmi</td>
+                        </tr>
+                        <tr>
+                            <td>Program Studi</td>
+                            <td>Pendidikan Guru Sekolah Dasar (PGSD)</td>
+                        </tr>
+                        <tr>
+                            <td>Perguruan Tinggi</td>
+                            <td>Universitas Negeri Jember</td>
+                        </tr>
+                        <tr>
+                            <td>NIM PPG</td>
+                            <td>190210204012</td>
+                        </tr>
+                        <tr>
+                            <td>Kategori PPG</td>
+                            <td>Pendidikan Profesi Guru (PPG) Prajabatan</td>
+                        </tr>
+                        <tr>
+                            <td>Fokus Inovasi</td>
+                            <td>Media Pembelajaran Digital & Game Edukasi Interaktif</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: KARYA INOVASI -->
+        <section id="karya-inovasi" class="tab-panel">
+            <div class="pdf-header-banner">
+                <small>Portofolio PPG - Hal. 2: Dokumentasi Karya Inovasi</small>
+            </div>
+            <div class="section-header">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h2>Karya Inovasi Pembelajaran</h2>
+            </div>
+            <p>Berikut adalah dokumentasi rancangan dan tampilan karya inovasi media pembelajaran berbasis web interaktif yang dikembangkan untuk meningkatkan keterlibatan peserta didik di kelas.</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-card">
+                    <img src="tampilaninovasi/halamanawal.png" alt="Halaman Awal Inovasi" onerror="this.src='https://via.placeholder.com/400x250?text=Tampilan+Awal+Inovasi'">
+                    <div class="gallery-card-body">
+                        <h4>Antarmuka Utama Platform</h4>
+                        <p>Tampilan awal aplikasi pembelajaran interaktif yang dirancang dengan antarmuka ramah anak dan mudah diakses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: REFLEKSI PENGALAMAN -->
+        <section id="refleksi-pengalaman" class="tab-panel">
+            <div class="pdf-header-banner">
+                <small>Portofolio PPG - Hal. 3: Refleksi Pengalaman Pembelajaran</small>
+            </div>
+            <div class="section-header">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <h2>Refleksi Pengalaman Berinovasi</h2>
+            </div>
+            
+            <div class="reflection-box">
+                <h3>1. Situasi (Situation)</h3>
+                <p>Pembelajaran konvensional di kelas sering kali belum mampu memfasilitasi keberagaman gaya belajar siswa secara optimal. Diperlukan media inovatif yang dapat memvisualisasikan konsep abstrak menjadi konkret dan menyenangkan.</p>
+            </div>
+
+            <div class="reflection-box">
+                <h3>2. Tantangan (Challenge)</h3>
+                <p>Tantangan utama adalah merancang aplikasi pembelajaran yang ringan, interaktif, responsif, serta terintegrasi langsung dengan materi kurikulum tanpa membebankan perangkat sekolah atau siswa.</p>
+            </div>
+
+            <div class="reflection-box">
+                <h3>3. Aksi (Action)</h3>
+                <p>Mengembangkan media berbasis web interaktif menggunakan ekosistem teknologi modern, melakukan uji coba di kelas, serta mengumpulkan umpan balik dari peserta didik dan dosen pembimbing untuk perbaikan berkelanjutan.</p>
+            </div>
+
+            <div class="reflection-box">
+                <h3>4. Hasil dan Refleksi (Result & Reflection)</h3>
+                <p>Penerapan media inovatif ini meningkatkan partisipasi aktif siswa, pemahaman materi meningkat signifikan, dan menciptakan suasana belajar yang lebih kolaboratif dan menyenangkan.</p>
+            </div>
+        </section>
+
     </main>
 
-    <!-- SCRIPT NAVIGASI, SWITCH TAB & PERBAIKAN EKSPOR PDF PPT 16:9 -->
+    <!-- Overlay Loading PDF Generation -->
+    <div id="pdf-loading">
+        <div class="spinner"></div>
+        <p>Sedang Mengemas Portofolio menjadi File PDF Rapi...</p>
+    </div>
+
+    <!-- Script Logika Tab & PDF Download -->
     <script>
-        let currentSlide = 1;
-        let totalSlides = 0;
+        // Logika Perpindahan Tab
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const panels = document.querySelectorAll('.tab-panel');
 
-        // DAFTAR URUTAN TAB KONTEN
-        const tabsList = [
-            'beranda.html',
-            'visi-pribadi.html',
-            'refleksi-pengalaman.html',
-            'karya-inovasi.html'
-        ];
+            tabs.forEach(tab => tab.classList.remove('active'));
+            panels.forEach(panel => panel.classList.remove('active'));
 
-        let currentTabIndex = 0;
-
-        // LOAD FILE KONTEN KE DALAM CONTAINER MAIN
-        async function loadTabContent(filePath) {
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error('Gagal memuat file konten.');
-                const html = await response.text();
-                document.getElementById('presentation-container').innerHTML = html;
-                
-                // Perbarui Indeks Tab Aktif
-                currentTabIndex = tabsList.indexOf(filePath);
-
-                // Tampilkan / Sembunyikan Tombol Panah Navigasi khusus Tab Beranda
-                const prevBtn = document.querySelector('button[onclick="prevSlide()"]');
-                const nextBtn = document.querySelector('button[onclick="nextSlide()"]');
-                if (prevBtn) prevBtn.style.display = filePath.includes('beranda') ? 'none' : 'flex';
-                if (nextBtn) nextBtn.style.display = filePath.includes('beranda') ? 'none' : 'flex';
-
-                // Hitung Ulang Total Slide
-                const slides = document.querySelectorAll('.slide-view');
-                totalSlides = slides.length;
-                currentSlide = 1;
-                updateSlideUI();
-            } catch (error) {
-                document.getElementById('presentation-container').innerHTML = `
-                    <div class="clean-card rounded-2xl p-8 text-center flex items-center justify-center w-full">
-                        <p class="text-slate-500 font-bold">Konten ${filePath} belum dapat dimuat atau file tidak ditemukan.</p>
-                    </div>
-                `;
+            const selectedPanel = document.getElementById(tabId);
+            if (selectedPanel) {
+                selectedPanel.classList.add('active');
             }
+
+            event.currentTarget.classList.add('active');
         }
 
-        // PERALIHAN TAB SECARA MANUAL
-        function switchTab(filePath, btnElement) {
-            updateTabButtonsUI(filePath);
-            loadTabContent(filePath);
-        }
+        // Logika Utama Mengemas Semua Tab menjadi Dokumen PDF yang Rapi Per Halaman
+        document.getElementById('downloadPdfBtn').addEventListener('click', async function () {
+            const loading = document.getElementById('pdf-loading');
+            loading.style.display = 'flex';
 
-        // UPDATE TAMPILAN TOMBOL TAB DI HEADER
-        function updateTabButtonsUI(filePath) {
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => {
-                const isBeranda = btn.ariaLabel === "Beranda";
-                const btnTargetFile = isBeranda ? 'beranda.html' : 
-                    (btn.textContent.includes('Visi') ? 'visi-pribadi.html' : 
-                    (btn.textContent.includes('Refleksi') ? 'refleksi-pengalaman.html' : 'karya-inovasi.html'));
+            const element = document.getElementById('content-to-export');
+            const panels = document.querySelectorAll('.tab-panel');
 
-                if (btnTargetFile === filePath) {
-                    btn.className = isBeranda 
-                        ? 'tab-btn active p-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer flex items-center justify-center'
-                        : 'tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white shadow-sm transition-all cursor-pointer whitespace-nowrap';
-                } else {
-                    btn.className = isBeranda 
-                        ? 'tab-btn p-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer flex items-center justify-center'
-                        : 'tab-btn px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-all cursor-pointer whitespace-nowrap';
-                }
+            // Simpan state tampilan asli
+            const originalTabState = [];
+            panels.forEach(panel => {
+                originalTabState.push(panel.style.display);
             });
-        }
 
-        // UPDATE TAMPILAN SLIDE AKTIFF
-        function updateSlideUI() {
-            const slides = document.querySelectorAll('.slide-view');
-            slides.forEach((slide, index) => {
-                if (index + 1 === currentSlide) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
-                }
+            // Ubah semua tab agar tampil berurutan untuk PDF
+            panels.forEach(panel => {
+                panel.style.display = 'block';
+                panel.classList.add('pdf-page-slide');
             });
-            window.scrollTo({ top: 0 });
-        }
 
-        // LOGIKA TOMBOL PANAH BERIKUTNYA (SWITCH TAB OTOMATIS SAAT SLIDE HABIS)
-        function nextSlide() {
-            if (totalSlides === 0) return;
+            document.body.classList.add('is-pdf');
 
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                updateSlideUI();
-            } else {
-                const nextTabIndex = (currentTabIndex + 1) % tabsList.length;
-                const nextFilePath = tabsList[nextTabIndex];
-                updateTabButtonsUI(nextFilePath);
-                loadTabContent(nextFilePath);
-            }
-        }
-
-        // LOGIKA TOMBOL PANAH SEBELUMNYA (KEMBALI TAB OTOMATIS)
-        function prevSlide() {
-            if (totalSlides === 0) return;
-
-            if (currentSlide > 1) {
-                currentSlide--;
-                updateSlideUI();
-            } else {
-                const prevTabIndex = (currentTabIndex - 1 + tabsList.length) % tabsList.length;
-                const prevFilePath = tabsList[prevTabIndex];
-                updateTabButtonsUI(prevFilePath);
-                loadTabContent(prevFilePath);
-            }
-        }
-
-        // TOGGLE FULLSCREEN
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch((err) => {
-                    alert(`Gagal mengaktifkan layar penuh: ${err.message}`);
-                });
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-        }
-
-        // UNDUH SELURUH SLIDE KE FORMAT PDF RASIO 16:9 RAPI & PROPORSIONAL
-        function downloadPDF() {
-            const element = document.getElementById('presentation-container');
-            
-            // Aktifkan mode khusus cetak PDF
-            document.body.classList.add('pdf-export-mode');
-
-            // Konfigurasi menggunakan ukuran mm presisi 16:9 (297mm x 167.06mm)
+            // Konfigurasi Kualitas dan Pengemasan html2pdf
             const opt = {
-                margin:       0,
-                filename:     'Presentasi_Portofolio_16x9.pdf',
+                margin:       [10, 10, 10, 10], // Margin (top, left, bottom, right) dalam mm
+                filename:     'Portofolio_Karya_Inovasi_PPG.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
                     scale: 2, 
-                    useCORS: true,
+                    useCORS: true, 
                     logging: false,
-                    windowWidth: 1000
+                    scrollY: 0
                 },
-                jsPDF:        { 
-                    unit: 'mm', 
-                    format: [297, 167.06], 
-                    orientation: 'landscape' 
-                }
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['css', 'legacy'] }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Kembalikan ke tampilan biasa setelah selesai
-                document.body.classList.remove('pdf-export-mode');
-                updateSlideUI();
-            });
-        }
-
-        // NAVIGASI KEYBOARD (PANAH KIRI & KANAN)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "ArrowRight") {
-                nextSlide();
-            } else if (event.key === "ArrowLeft") {
-                prevSlide();
+            try {
+                // Generasi PDF dari seluruh elemen portofolio
+                await html2pdf().set(opt).from(element).save();
+            } catch (error) {
+                console.error("Gagal membuat PDF:", error);
+                alert("Terjadi kesalahan saat mengunduh dokumen PDF. Silakan coba lagi.");
+            } finally {
+                // Kembalikan tampilan website ke kondisi semula
+                panels.forEach((panel, idx) => {
+                    panel.style.display = originalTabState[idx];
+                    panel.classList.remove('pdf-page-slide');
+                });
+                document.body.classList.remove('is-pdf');
+                loading.style.display = 'none';
             }
-        });
-
-        // MUAT TAB BERANDA SECARA DEFAULT SAAT PERTAMA KALI DIBUKA
-        window.addEventListener('DOMContentLoaded', () => {
-            loadTabContent('beranda.html');
         });
     </script>
 </body>
