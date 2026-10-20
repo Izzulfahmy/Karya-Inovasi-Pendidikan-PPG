@@ -44,29 +44,35 @@
             display: block;
         }
 
-        /* STYLING KHUSUS MODE EXPORT PDF ALL SLIDES (16:9 PROPORSIONAL) */
+        /* STYLING PRESISE KHUSUS EKSPOR PDF ALL SLIDES (16:9 PROPORSIONAL & CENTERED) */
         #pdf-export-container {
             position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 1000px;
+            top: -99999px;
+            left: -99999px;
+            width: 1122px;
         }
 
         .pdf-render-wrapper {
-            width: 1000px !important;
-            background-color: #f8fafc;
+            width: 1122px !important;
+            background-color: #ffffff;
+            margin: 0 auto !important;
+            padding: 0 !important;
         }
 
         .pdf-render-wrapper .slide-view {
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
             page-break-after: always !important;
             page-break-inside: avoid !important;
-            width: 1000px !important;
-            height: 562.5px !important; /* Rasio 16:9 Presisi (1000 x 562.5) */
+            width: 1122px !important;
+            height: 631px !important; /* Rasio 16:9 Presisi A4 Landscape (1122 x 631 px) */
             box-sizing: border-box !important;
             margin: 0 !important;
-            padding: 12px !important;
+            padding: 16px !important;
             overflow: hidden !important;
+            background-color: #f8fafc !important;
         }
 
         .pdf-render-wrapper .clean-card {
@@ -74,10 +80,10 @@
             height: 100% !important;
             min-height: 100% !important;
             max-height: 100% !important;
-            border-radius: 12px !important;
+            border-radius: 16px !important;
             box-shadow: none !important;
             border: 1px solid #e2e8f0 !important;
-            padding: 1.5rem !important;
+            padding: 1.75rem !important;
             box-sizing: border-box !important;
             display: flex !important;
             flex-direction: column !important;
@@ -293,7 +299,7 @@
             }
         }
 
-        // UNDUH SELURUH SLIDE DARI SEMUA TAB KE FORMAT PDF RASIO 16:9 RAPI & BERURUTAN
+        // UNDUH SELURUH SLIDE DARI SEMUA TAB KE FORMAT PDF RASIO 16:9 RAPI, CENTERED & BERURUTAN
         async function downloadPDF() {
             const btnDownload = document.getElementById('btn-download-pdf');
             const originalBtnHtml = btnDownload.innerHTML;
@@ -350,7 +356,7 @@
 
                 pdfContainer.appendChild(wrapper);
 
-                // 2. Konfigurasi html2pdf (Rasio Lanskap PPT 16:9)
+                // 2. Konfigurasi html2pdf (Sesuai Ukuran Piksel Canvas 1122px x 631px)
                 const opt = {
                     margin:       0,
                     filename:     'Portofolio_dan_Karya_Inovasi_Pendidikan.pdf',
@@ -359,11 +365,11 @@
                         scale: 2, 
                         useCORS: true,
                         logging: false,
-                        windowWidth: 1000
+                        windowWidth: 1122
                     },
                     jsPDF:        { 
                         unit: 'mm', 
-                        format: [297, 167.06], 
+                        format: 'a4', 
                         orientation: 'landscape' 
                     }
                 };
